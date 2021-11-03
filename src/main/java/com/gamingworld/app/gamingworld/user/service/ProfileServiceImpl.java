@@ -5,20 +5,23 @@ import java.util.Optional;
 
 import com.gamingworld.app.gamingworld.user.domain.model.entity.Profile;
 import com.gamingworld.app.gamingworld.user.domain.persitence.ProfileRepository;
+import com.gamingworld.app.gamingworld.user.domain.service.ProfileService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ProfileService {
+public class ProfileServiceImpl implements ProfileService{
     
     @Autowired
     private ProfileRepository profileRepository;
 
+    @Override
     public List<Profile> getAll() {
         return profileRepository.findAll();
     }
 
+    @Override
     public Optional<Profile> findById(Long id) {
         return profileRepository.findById(id);
     }

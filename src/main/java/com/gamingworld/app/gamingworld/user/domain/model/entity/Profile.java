@@ -29,10 +29,9 @@ public class Profile extends AuditModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private @Getter @Setter Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @PrimaryKeyJoinColumn
+    @OneToOne
     private @Getter @Setter User user;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany
     private @Getter @Setter List<GameExperience> gameExperiences;
 }

@@ -5,22 +5,28 @@ import java.util.Optional;
 
 import com.gamingworld.app.gamingworld.user.domain.model.entity.GameExperience;
 import com.gamingworld.app.gamingworld.user.domain.persitence.GameExperienceRepository;
+import com.gamingworld.app.gamingworld.user.domain.service.GameExperienceService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class GameExperienceService {
+public class GameExperienceServiceImpl implements GameExperienceService {
     
+    @Autowired
     private GameExperienceRepository gameRepository;
 
+    @Override
     public List<GameExperience> getAll() {
         return gameRepository.findAll();
     }
 
+    @Override
     public Optional<GameExperience> findById(Long id){
         return gameRepository.findById(id);
     }
 
+    @Override
     public GameExperience save(GameExperience gameExperience){
         return gameRepository.save(gameExperience);
     }

@@ -3,7 +3,7 @@ package com.gamingworld.app.gamingworld.user.api;
 import java.util.List;
 
 import com.gamingworld.app.gamingworld.user.domain.model.entity.User;
-import com.gamingworld.app.gamingworld.user.service.UserService;
+import com.gamingworld.app.gamingworld.user.service.UserServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
 
     @GetMapping(path = "")
     public @ResponseBody List<User> getAll(){
