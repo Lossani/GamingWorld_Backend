@@ -2,20 +2,27 @@ package com.gamingworld.app.gamingworld.user.domain.model.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.gamingworld.app.gamingworld.shared.model.AuditModel;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "users")
+@Table(name = "user")
+@NoArgsConstructor
+@RequiredArgsConstructor
 public class User extends AuditModel{
     
     @Id
@@ -23,14 +30,14 @@ public class User extends AuditModel{
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private String username;
+    @NonNull private String username;
 
     @Column(nullable = false, unique = true)
-    private String email;
+    @NonNull private String email;
 
     @Column(nullable = false)
-    private String password;
+    @NonNull private String password;
 
-    @Column(nullable = false)
-    private boolean premium;
+    @Column
+    private Boolean premium = false;
 }
