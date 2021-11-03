@@ -13,12 +13,14 @@ import javax.persistence.Table;
 import com.gamingworld.app.gamingworld.game.domain.model.entity.Game;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "game_experience")
+@NoArgsConstructor
 public class GameExperience {
     
     @Id
@@ -31,4 +33,9 @@ public class GameExperience {
 
     @Column(nullable = false)
     private Integer experience;
+
+    public GameExperience(Game game, Integer experience) {
+        this.game = game;
+        this.experience = experience;
+    }    
 }
