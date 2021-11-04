@@ -30,4 +30,9 @@ public class GameExperienceServiceImpl implements GameExperienceService {
     public GameExperience save(GameExperience gameExperience){
         return gameRepository.save(gameExperience);
     }
+
+    @Override
+    public void deleteById(Long id) {
+        gameRepository.deleteById(id);
+    }
 }
