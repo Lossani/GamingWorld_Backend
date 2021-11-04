@@ -9,4 +9,5 @@ public interface GameExperienceService {
     public List<GameExperience> getAll();
     public Optional<GameExperience> findById(Long id);
     public GameExperience save(GameExperience gameExperience);
+    public void deleteById(Long id);
 }
