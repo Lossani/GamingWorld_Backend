@@ -12,7 +12,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.gamingworld.app.gamingworld.shared.model.AuditModel;
+import com.gamingworld.app.gamingworld.tournament.shared.model.AuditModel;
 import com.gamingworld.app.gamingworld.user.domain.model.entity.Profile;
 
 import lombok.Getter;

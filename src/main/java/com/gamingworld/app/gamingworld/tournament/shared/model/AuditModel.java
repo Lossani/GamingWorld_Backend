@@ -1,4 +1,4 @@
-package com.gamingworld.app.gamingworld.shared.model;
+package com.gamingworld.app.gamingworld.tournament.shared.model;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -23,6 +23,7 @@ import lombok.Setter;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, allowGetters = true)
+
 public abstract class AuditModel implements Serializable{
     
     @Temporal(TemporalType.TIMESTAMP)

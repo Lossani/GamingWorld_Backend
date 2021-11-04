@@ -12,17 +12,20 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.gamingworld.app.gamingworld.game.domain.model.entity.Game;
-import com.gamingworld.app.gamingworld.shared.model.AuditModel;
+import com.gamingworld.app.gamingworld.tournament.shared.model.AuditModel;
 import com.gamingworld.app.gamingworld.user.domain.model.entity.User;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+@With
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "tournament")
 @Inheritance(strategy = InheritanceType.JOINED)
+
 public class Tournament extends AuditModel{
     
     @Id
