@@ -1,15 +1,11 @@
 package com.gamingworld.app.gamingworld.tournament.domain.model.entity;
 
-import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.gamingworld.app.gamingworld.tournament.shared.model.AuditModel;
 import com.gamingworld.app.gamingworld.user.domain.model.entity.Profile;
-
 import lombok.*;
 
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 @Getter
 @Setter
@@ -17,25 +13,19 @@ import java.util.List;
 @With
 @AllArgsConstructor
 @NoArgsConstructor
-@RequiredArgsConstructor
-@Table(name = "participant")
+@Table(name = "team_participant")
 @Inheritance(strategy = InheritanceType.JOINED)
+public class TeamParticipant extends AuditModel implements Serializable {
 
-
-public class Participant extends AuditModel implements Serializable{
-    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column
-    @NonNull private Integer points;
-
     @OneToOne
-    @NonNull private Profile participantProfile;
+    private Profile participantProfile;
 
     private Long tournamentId;
 
-
+    private Long teamId;
 
 }

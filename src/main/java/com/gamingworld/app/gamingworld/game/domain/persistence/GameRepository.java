@@ -1,4 +1,4 @@
-package com.gamingworld.app.gamingworld.game.domain.persitence;
+package com.gamingworld.app.gamingworld.game.domain.persistence;
 
 import com.gamingworld.app.gamingworld.game.domain.model.entity.Game;
 

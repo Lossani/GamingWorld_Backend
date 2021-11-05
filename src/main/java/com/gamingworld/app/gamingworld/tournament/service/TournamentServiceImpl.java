@@ -1,5 +1,8 @@
 package com.gamingworld.app.gamingworld.tournament.service;
 
+import com.gamingworld.app.gamingworld.tournament.domain.model.entity.Participant;
+import com.gamingworld.app.gamingworld.tournament.domain.model.entity.Team;
+import com.gamingworld.app.gamingworld.tournament.domain.persitence.ParticipantRepository;
 import com.gamingworld.app.gamingworld.tournament.shared.exception.ResourceNotFoundException;
 import com.gamingworld.app.gamingworld.tournament.shared.exception.ResourceValidationException;
 import com.gamingworld.app.gamingworld.tournament.domain.model.entity.Tournament;
@@ -10,6 +13,7 @@ import com.gamingworld.app.gamingworld.user.domain.persitence.UserRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.Part;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import java.util.List;
@@ -27,11 +31,14 @@ public class TournamentServiceImpl implements TournamentService {
 
     private final UserRepository userRepository;
 
+    private final ParticipantRepository participantRepository;
 
-    public TournamentServiceImpl(TournamentRepository tournamentRepository, Validator validator, UserRepository userRepository) {
+
+    public TournamentServiceImpl(TournamentRepository tournamentRepository, Validator validator, UserRepository userRepository, ParticipantRepository participantRepository) {
         this.tournamentRepository = tournamentRepository;
         this.validator = validator;
         this.userRepository = userRepository;
+        this.participantRepository = participantRepository;
     }
 
 
@@ -82,5 +89,29 @@ public class TournamentServiceImpl implements TournamentService {
     @Override
     public List<Tournament> getTournamentsByUserId(Long userId) {
         return tournamentRepository.findByUserId(userId);
+    }
+
+    @Override
+    public Participant updateParticipantPoints(Long tournamentId, Long participantId, int points) {
+
+        Participant participant = participantRepository.getById(participantId);
+        participant.setPoints(points);
+
+        return participantRepository.save(participant);
+    }
+
+    @Override
+    public Team updateTeamPoints(Long tournamentId, Long teamId, int points) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<?> deleteParticipantInTournament(Long tournamentId, Long participantId) {
+
+        return participantRepository.findById(participantId).map(participant -> {
+            participantRepository.delete(participant);
+            return ResponseEntity.ok().build();
+        }).orElseThrow(() -> new ResourceNotFoundException(ENTITY, participantId));
+
     }
 }
