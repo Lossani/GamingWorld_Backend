@@ -7,5 +7,7 @@ import org.springframework.context.annotation.Configuration;
 public class MappingConfiguration {
     @Bean
     public TournamentMapper tournamentMapper(){ return new TournamentMapper(); }
+    @Bean
+    public ParticipantMapper participantMapper(){ return new ParticipantMapper(); }
 
 }

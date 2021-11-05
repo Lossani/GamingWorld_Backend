@@ -1,28 +1,27 @@
 package com.gamingworld.app.gamingworld.tournament.domain.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import com.gamingworld.app.gamingworld.tournament.shared.model.AuditModel;
 import com.gamingworld.app.gamingworld.user.domain.model.entity.Profile;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.io.Serializable;
+import java.util.List;
 
 @Getter
 @Setter
 @Entity
-@Table
+@With
+@AllArgsConstructor
 @NoArgsConstructor
 @RequiredArgsConstructor
-public class Participant {
+@Table(name = "participant")
+@Inheritance(strategy = InheritanceType.JOINED)
+
+
+public class Participant extends AuditModel implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,4 +32,7 @@ public class Participant {
 
     @ManyToOne
     @NonNull private Profile participantProfile;
+
+    @ManyToOne(fetch = FetchType.LAZY) private Tournament tournament;
+
 }

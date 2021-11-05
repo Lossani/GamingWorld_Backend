@@ -1,8 +1,11 @@
 package com.gamingworld.app.gamingworld.tournament.api;
 
+import com.gamingworld.app.gamingworld.tournament.domain.model.entity.Participant;
 import com.gamingworld.app.gamingworld.tournament.domain.model.entity.Tournament;
+import com.gamingworld.app.gamingworld.tournament.domain.service.ParticipantService;
 import com.gamingworld.app.gamingworld.tournament.domain.service.TournamentService;
 import com.gamingworld.app.gamingworld.tournament.mapping.TournamentMapper;
+import com.gamingworld.app.gamingworld.tournament.resource.CreateParticipantResource;
 import com.gamingworld.app.gamingworld.tournament.resource.CreateTournamentResource;
 import com.gamingworld.app.gamingworld.tournament.resource.TournamentResource;
 import com.gamingworld.app.gamingworld.tournament.resource.UpdateTournamentResource;
