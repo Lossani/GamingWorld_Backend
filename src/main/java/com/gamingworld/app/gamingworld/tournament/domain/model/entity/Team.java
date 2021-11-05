@@ -15,6 +15,7 @@ import lombok.*;
 @With
 @AllArgsConstructor
 @NoArgsConstructor
+@RequiredArgsConstructor
 @Table(name = "team")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Team extends AuditModel {
@@ -40,4 +41,6 @@ public class Team extends AuditModel {
 
     @Column
     private Integer points = 0;
+
+    private Long tournamentId;
 }
