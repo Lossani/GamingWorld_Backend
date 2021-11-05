@@ -1,5 +1,6 @@
 package com.gamingworld.app.gamingworld.tournament.domain.model.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.*;
@@ -15,10 +16,9 @@ import lombok.*;
 @With
 @AllArgsConstructor
 @NoArgsConstructor
-@RequiredArgsConstructor
 @Table(name = "team")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Team extends AuditModel {
+public class Team extends AuditModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,10 +33,10 @@ public class Team extends AuditModel {
     @Column(name = "image_url")
     private String imageUrl;
 
-    @ManyToOne(targetEntity = Profile.class)
+    @OneToOne(targetEntity = Profile.class)
     private Profile ownerProfile;
 
-    @ManyToMany
+    @OneToMany
     private List<Profile> members;
 
     @Column

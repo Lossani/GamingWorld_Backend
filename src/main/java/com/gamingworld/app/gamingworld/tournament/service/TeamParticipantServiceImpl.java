@@ -29,13 +29,11 @@ public class TeamParticipantServiceImpl implements TeamParticipantService {
 
     private final Validator validator;
 
-    private final UserRepository userRepository;
 
     public TeamParticipantServiceImpl(TeamParticipantRepository teamParticipantRepository, TournamentRepository tournamentRepository, Validator validator, UserRepository userRepository) {
         this.teamParticipantRepository = teamParticipantRepository;
         this.tournamentRepository = tournamentRepository;
         this.validator = validator;
-        this.userRepository = userRepository;
     }
 
     @Override

@@ -9,10 +9,9 @@ import com.gamingworld.app.gamingworld.tournament.shared.exception.ResourceValid
 import com.gamingworld.app.gamingworld.user.domain.persitence.UserRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.xml.sax.SAXException;
 
 import javax.validation.ConstraintViolation;
-import javax.xml.validation.Validator;
+import javax.validation.Validator;
 import java.util.List;
 import java.util.Set;
 
@@ -27,13 +26,10 @@ public class TeamServiceImpl implements TeamService {
 
     private final Validator validator;
 
-    private final UserRepository userRepository;
-
     public TeamServiceImpl(TeamRepository teamRepository, TournamentRepository tournamentRepository, Validator validator, UserRepository userRepository) {
         this.teamRepository = teamRepository;
         this.tournamentRepository = tournamentRepository;
         this.validator = validator;
-        this.userRepository = userRepository;
     }
 
     @Override
@@ -51,7 +47,6 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public Team create(Long tournamentId, Team team){
-
         if(tournamentRepository.findById(tournamentId).isEmpty())
             throw new ResourceNotFoundException(ENTITY, tournamentId);
 

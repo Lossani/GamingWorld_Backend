@@ -1,6 +1,5 @@
 package com.gamingworld.app.gamingworld.tournament.mapping;
 
-import com.gamingworld.app.gamingworld.tournament.domain.model.entity.Participant;
 import com.gamingworld.app.gamingworld.tournament.domain.model.entity.TeamParticipant;
 import com.gamingworld.app.gamingworld.tournament.resource.*;
 import com.gamingworld.app.gamingworld.tournament.shared.mapping.EnhancedModelMapper;
@@ -25,6 +24,7 @@ public class TeamParticipantMapper implements Serializable {
     }
 
     public TeamParticipant toModel(CreateTeamParticipantResource resource) {
+        mapper.getConfiguration().setAmbiguityIgnored(true);
         return mapper.map(resource, TeamParticipant.class);
     }
 }
