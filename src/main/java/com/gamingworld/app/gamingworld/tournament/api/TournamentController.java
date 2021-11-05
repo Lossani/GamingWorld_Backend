@@ -125,9 +125,9 @@ public class TournamentController {
     // Team Participants
 
     @PostMapping("{tournamentId}/teams/{teamId}/participants")
-    public TeamParticipantResource createTeamParticipantByTeamId(@RequestBody CreateTeamParticipantResource request, @PathVariable("teamId") Long teamId) {
+    public TeamParticipantResource createTeamParticipantByTeamId(@PathVariable("tournamentId") Long tournamentId, @RequestBody CreateTeamParticipantResource request, @PathVariable("teamId") Long teamId) {
 
-        return teamParticipantMapper.toResource(teamParticipantService.create(teamId, teamParticipantMapper.toModel(request)));
+        return teamParticipantMapper.toResource(teamParticipantService.create(tournamentId, teamId, teamParticipantMapper.toModel(request)));
     }
 
     @GetMapping("{tournamentId}/teams/{teamId}/participants")

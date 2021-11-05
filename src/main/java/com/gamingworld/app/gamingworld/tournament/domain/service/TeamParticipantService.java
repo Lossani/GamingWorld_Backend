@@ -14,9 +14,9 @@ public interface TeamParticipantService {
     public TeamParticipant getByTournamentId(Long tournamentId);
     public List<TeamParticipant> getAllByTeamId(Long teamId);
 
-    public TeamParticipant create(Long teamId,TeamParticipant teamParticipant);
+    public TeamParticipant create(Long tournamentId, Long teamId,TeamParticipant teamParticipant);
 
-    public TeamParticipant update(Long teamId, TeamParticipant teamParticipant);
+    public TeamParticipant update(Long teamParticipantId, TeamParticipant teamParticipant);
 
     public ResponseEntity<?> delete(Long teamParticipantId);
 }
