@@ -3,6 +3,7 @@ package com.gamingworld.app.gamingworld.tournament.service;
 import com.gamingworld.app.gamingworld.tournament.domain.model.entity.Participant;
 import com.gamingworld.app.gamingworld.tournament.domain.model.entity.Team;
 import com.gamingworld.app.gamingworld.tournament.domain.persitence.ParticipantRepository;
+import com.gamingworld.app.gamingworld.tournament.domain.persitence.TeamRepository;
 import com.gamingworld.app.gamingworld.tournament.shared.exception.ResourceNotFoundException;
 import com.gamingworld.app.gamingworld.tournament.shared.exception.ResourceValidationException;
 import com.gamingworld.app.gamingworld.tournament.domain.model.entity.Tournament;
@@ -13,7 +14,6 @@ import com.gamingworld.app.gamingworld.user.domain.persitence.UserRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.Part;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import java.util.List;
@@ -33,12 +33,15 @@ public class TournamentServiceImpl implements TournamentService {
 
     private final ParticipantRepository participantRepository;
 
+    private final TeamRepository teamRepository;
 
-    public TournamentServiceImpl(TournamentRepository tournamentRepository, Validator validator, UserRepository userRepository, ParticipantRepository participantRepository) {
+
+    public TournamentServiceImpl(TournamentRepository tournamentRepository, Validator validator, UserRepository userRepository, ParticipantRepository participantRepository, TeamRepository teamRepository) {
         this.tournamentRepository = tournamentRepository;
         this.validator = validator;
         this.userRepository = userRepository;
         this.participantRepository = participantRepository;
+        this.teamRepository = teamRepository;
     }
 
 
@@ -102,7 +105,10 @@ public class TournamentServiceImpl implements TournamentService {
 
     @Override
     public Team updateTeamPoints(Long tournamentId, Long teamId, int points) {
-        return null;
+        Team team = teamRepository.getById(teamId);
+        team.setPoints(points);
+
+        return teamRepository.save(team);
     }
 
     @Override

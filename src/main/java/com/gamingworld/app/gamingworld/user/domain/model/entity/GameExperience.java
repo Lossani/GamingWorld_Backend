@@ -24,7 +24,7 @@ import lombok.Setter;
 public class GameExperience {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(targetEntity = Game.class, fetch = FetchType.LAZY)

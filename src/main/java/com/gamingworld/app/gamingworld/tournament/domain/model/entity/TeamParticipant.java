@@ -18,7 +18,7 @@ import java.io.Serializable;
 public class TeamParticipant extends AuditModel implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne
