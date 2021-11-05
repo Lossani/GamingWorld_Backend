@@ -11,4 +11,5 @@ public class TournamentResource {
     private String title;
     private String description;
     private Number prizePool;
+    private Boolean isTeamMode;
 }

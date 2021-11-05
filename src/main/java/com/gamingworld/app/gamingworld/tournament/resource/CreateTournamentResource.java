@@ -20,4 +20,7 @@ public class CreateTournamentResource {
 
     @NotNull
     private Number prizePool;
+
+    @NotNull
+    private Boolean isTeamMode;
 }

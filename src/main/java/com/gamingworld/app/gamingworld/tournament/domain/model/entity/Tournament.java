@@ -24,7 +24,7 @@ import java.util.List;
 public class Tournament extends AuditModel implements Serializable{
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne()
@@ -44,6 +44,10 @@ public class Tournament extends AuditModel implements Serializable{
 
     @Column
     private String title;
+
+    @NonNull
+    @Column
+    private Boolean isTeamMode;
 
     @Column(length = 512)
     private String description;
