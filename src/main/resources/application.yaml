@@ -1,9 +1,9 @@
 spring:
     jpa:
         hibernate:
-            ddl-auto: create-drop
+            ddl-auto: update
     datasource:
-        url: 'jdbc:mysql://127.0.0.1:3306/GamerWorld'
+        url: 'jdbc:mysql://127.0.0.1:3306/gamingworld_aos'
         username: root
-        password: Farlopa93
+        password: 123456
         driver-class-name: com.mysql.cj.jdbc.Driver
