@@ -10,5 +10,8 @@ public class MappingConfiguration {
     public TournamentMapper tournamentMapper(){ return new TournamentMapper(); }
     @Bean
     public ParticipantMapper participantMapper(){ return new ParticipantMapper(); }
-
+    @Bean
+    public TeamParticipantMapper teamParticipantMapper(){ return new TeamParticipantMapper(); }
+    @Bean
+    public TeamMapper teamMapper(){ return new TeamMapper(); }
 }

@@ -34,18 +34,18 @@ public class Team extends AuditModel {
     private Long id;
 
     @Column
-    @NonNull private String title;
+    @NonNull private String name;
     
     @Column
-    @NonNull private String description;
+    private String description;
 
     @Column(name = "image_url")
     private String imageUrl;
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Profile.class)
+    @ManyToOne(targetEntity = Profile.class)
     private Profile ownerProfile;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     private List<Profile> members;
 
     @Column

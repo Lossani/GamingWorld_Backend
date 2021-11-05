@@ -31,7 +31,7 @@ public class Participant extends AuditModel implements Serializable{
     @Column
     @NonNull private Integer points;
 
-    @ManyToOne
+    @OneToOne
     @NonNull private Profile participantProfile;
 
     private Long tournamentId;

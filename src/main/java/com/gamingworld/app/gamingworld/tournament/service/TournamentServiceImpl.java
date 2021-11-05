@@ -1,6 +1,7 @@
 package com.gamingworld.app.gamingworld.tournament.service;
 
 import com.gamingworld.app.gamingworld.tournament.domain.model.entity.Participant;
+import com.gamingworld.app.gamingworld.tournament.domain.model.entity.Team;
 import com.gamingworld.app.gamingworld.tournament.domain.persitence.ParticipantRepository;
 import com.gamingworld.app.gamingworld.tournament.shared.exception.ResourceNotFoundException;
 import com.gamingworld.app.gamingworld.tournament.shared.exception.ResourceValidationException;
@@ -97,6 +98,11 @@ public class TournamentServiceImpl implements TournamentService {
         participant.setPoints(points);
 
         return participantRepository.save(participant);
+    }
+
+    @Override
+    public Team updateTeamPoints(Long tournamentId, Long teamId, int points) {
+        return null;
     }
 
     @Override
