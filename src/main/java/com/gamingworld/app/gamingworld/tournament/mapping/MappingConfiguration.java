@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration("tournamentMappingConfiguration")
 public class MappingConfiguration {
+
     @Bean
     public TournamentMapper tournamentMapper(){ return new TournamentMapper(); }
     @Bean

@@ -13,7 +13,7 @@ public interface ParticipantService {
     public Participant getByTournamentId(Long tournamentId);
     public List<Participant> getAllByTournamentId(Long tournamentId);
 
-    public Participant create(Participant participant);
+    public Participant create(Long tournamentId,Participant participant);
 
     public Participant update(Long tournamentId, Participant participant);
 

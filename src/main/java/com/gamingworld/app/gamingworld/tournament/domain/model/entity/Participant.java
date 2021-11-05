@@ -2,6 +2,7 @@ package com.gamingworld.app.gamingworld.tournament.domain.model.entity;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.gamingworld.app.gamingworld.tournament.shared.model.AuditModel;
 import com.gamingworld.app.gamingworld.user.domain.model.entity.Profile;
 
@@ -21,7 +22,7 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.JOINED)
 
 
-public class Participant extends AuditModel implements Serializable {
+public class Participant extends AuditModel implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,6 +34,8 @@ public class Participant extends AuditModel implements Serializable {
     @ManyToOne
     @NonNull private Profile participantProfile;
 
-    @ManyToOne(fetch = FetchType.LAZY) private Tournament tournament;
+    private Long tournamentId;
+
+
 
 }

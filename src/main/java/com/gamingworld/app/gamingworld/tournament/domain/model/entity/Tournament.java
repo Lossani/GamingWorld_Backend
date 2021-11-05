@@ -21,20 +21,20 @@ import java.util.List;
 @Table(name = "tournament")
 @Inheritance(strategy = InheritanceType.JOINED)
 
-public class Tournament extends AuditModel implements Serializable {
+public class Tournament extends AuditModel{
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     private Game game;
 
     @Nullable
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany()
     private List<Participant> participantList;
 
     @Column

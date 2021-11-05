@@ -2,15 +2,12 @@ package com.gamingworld.app.gamingworld.tournament.service;
 
 import com.gamingworld.app.gamingworld.tournament.domain.model.entity.Participant;
 import com.gamingworld.app.gamingworld.tournament.domain.persitence.ParticipantRepository;
+import com.gamingworld.app.gamingworld.tournament.domain.persitence.TournamentRepository;
 import com.gamingworld.app.gamingworld.tournament.domain.service.ParticipantService;
-import com.gamingworld.app.gamingworld.tournament.mapping.ParticipantMapper;
-import com.gamingworld.app.gamingworld.tournament.resource.CreateParticipantResource;
 import com.gamingworld.app.gamingworld.tournament.shared.exception.ResourceNotFoundException;
 import com.gamingworld.app.gamingworld.tournament.shared.exception.ResourceValidationException;
 import com.gamingworld.app.gamingworld.user.domain.model.entity.Profile;
-import com.gamingworld.app.gamingworld.user.domain.persitence.ProfileRepository;
 import com.gamingworld.app.gamingworld.user.domain.persitence.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -27,13 +24,16 @@ public class ParticipantServiceImpl implements ParticipantService {
 
     private final ParticipantRepository participantRepository;
 
+    private final TournamentRepository tournamentRepository;
+
 
     private final Validator validator;
 
     private final UserRepository userRepository;
 
-    public ParticipantServiceImpl(ParticipantRepository participantRepository, Validator validator, UserRepository userRepository) {
+    public ParticipantServiceImpl(ParticipantRepository participantRepository, TournamentRepository tournamentRepository, Validator validator, UserRepository userRepository) {
         this.participantRepository = participantRepository;
+        this.tournamentRepository = tournamentRepository;
         this.validator = validator;
         this.userRepository = userRepository;
     }
@@ -60,7 +60,13 @@ public class ParticipantServiceImpl implements ParticipantService {
     }
 
     @Override
-    public Participant create( Participant participant) {
+    public Participant create(Long tournamentId, Participant participant) {
+
+        if(tournamentRepository.findById(tournamentId).isEmpty())
+            throw new ResourceNotFoundException(ENTITY, tournamentId);
+
+        participant.setTournamentId(tournamentId);
+
         Set<ConstraintViolation<Participant>> violations = validator.validate(participant);
         if (!violations.isEmpty())
             throw new ResourceValidationException(ENTITY, violations);
