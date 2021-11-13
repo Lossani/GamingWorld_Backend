@@ -10,5 +10,7 @@ public interface UserService {
 
     public Optional<User> findById(Long id);
 
+    public Optional<User> findByEmail(String id);
+
     public User save(User entity);
 }
