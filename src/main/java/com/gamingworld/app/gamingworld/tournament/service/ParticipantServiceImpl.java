@@ -6,8 +6,7 @@ import com.gamingworld.app.gamingworld.tournament.domain.persitence.TournamentRe
 import com.gamingworld.app.gamingworld.tournament.domain.service.ParticipantService;
 import com.gamingworld.app.gamingworld.tournament.shared.exception.ResourceNotFoundException;
 import com.gamingworld.app.gamingworld.tournament.shared.exception.ResourceValidationException;
-import com.gamingworld.app.gamingworld.user.domain.model.entity.Profile;
-import com.gamingworld.app.gamingworld.user.domain.persitence.UserRepository;
+import com.gamingworld.app.gamingworld.user.domain.persitence.User2Repository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -29,13 +28,13 @@ public class ParticipantServiceImpl implements ParticipantService {
 
     private final Validator validator;
 
-    private final UserRepository userRepository;
+    private final User2Repository user2Repository;
 
-    public ParticipantServiceImpl(ParticipantRepository participantRepository, TournamentRepository tournamentRepository, Validator validator, UserRepository userRepository) {
+    public ParticipantServiceImpl(ParticipantRepository participantRepository, TournamentRepository tournamentRepository, Validator validator, User2Repository user2Repository) {
         this.participantRepository = participantRepository;
         this.tournamentRepository = tournamentRepository;
         this.validator = validator;
-        this.userRepository = userRepository;
+        this.user2Repository = user2Repository;
     }
 
 

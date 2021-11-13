@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface TournamentRepository extends JpaRepository<Tournament, Long> {
 
-    @Query(value = "SELECT t FROM Tournament t WHERE t.user.id = :tournamentId")
+    @Query(value = "SELECT t FROM Tournament t WHERE t.user2.id = :tournamentId")
     public List<Tournament> findByUserId (@Param("tournamentId") Long tournamentId);
 
 

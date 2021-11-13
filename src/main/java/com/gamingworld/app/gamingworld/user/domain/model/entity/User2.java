@@ -18,10 +18,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "user")
+@Table(name = "user2")
 @NoArgsConstructor
 @RequiredArgsConstructor
-public class User extends AuditModel{
+public class User2 extends AuditModel{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

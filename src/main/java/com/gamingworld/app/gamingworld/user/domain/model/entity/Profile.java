@@ -26,7 +26,8 @@ public class Profile extends AuditModel {
     private @Getter @Setter Long id;
 
     @OneToOne
-    private @Getter @Setter User user;
+    private @Getter @Setter
+    User2 user2;
 
     @OneToMany
     private @Getter @Setter List<GameExperience> gameExperiences;

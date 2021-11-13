@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 import com.gamingworld.app.gamingworld.game.domain.model.entity.Game;
 import com.gamingworld.app.gamingworld.tournament.shared.model.AuditModel;
-import com.gamingworld.app.gamingworld.user.domain.model.entity.User;
+import com.gamingworld.app.gamingworld.user.domain.model.entity.User2;
 
 import lombok.*;
 import org.springframework.lang.Nullable;
@@ -28,7 +28,7 @@ public class Tournament extends AuditModel implements Serializable{
     private Long id;
 
     @OneToOne()
-    private User user;
+    private User2 user2;
 
     @OneToOne()
     private Game game;
