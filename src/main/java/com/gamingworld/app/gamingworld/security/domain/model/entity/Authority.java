@@ -1,5 +1,7 @@
 package com.gamingworld.app.gamingworld.security.domain.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,6 +14,7 @@ public class Authority {
     @Column(length = 30, nullable = false)
     private String authority;
 
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;

@@ -1,5 +1,7 @@
 package com.gamingworld.app.gamingworld.tournament.service;
 
+import com.gamingworld.app.gamingworld.security.domain.model.entity.User;
+import com.gamingworld.app.gamingworld.security.domain.persistence.UserRepository;
 import com.gamingworld.app.gamingworld.tournament.domain.model.entity.Participant;
 import com.gamingworld.app.gamingworld.tournament.domain.model.entity.Team;
 import com.gamingworld.app.gamingworld.tournament.domain.persitence.ParticipantRepository;
@@ -9,8 +11,6 @@ import com.gamingworld.app.gamingworld.tournament.shared.exception.ResourceValid
 import com.gamingworld.app.gamingworld.tournament.domain.model.entity.Tournament;
 import com.gamingworld.app.gamingworld.tournament.domain.persitence.TournamentRepository;
 import com.gamingworld.app.gamingworld.tournament.domain.service.TournamentService;
-import com.gamingworld.app.gamingworld.user.domain.model.entity.User2;
-import com.gamingworld.app.gamingworld.user.domain.persitence.User2Repository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -29,17 +29,17 @@ public class TournamentServiceImpl implements TournamentService {
 
     private final Validator validator;
 
-    private final User2Repository user2Repository;
+    private final UserRepository userRepository;
 
     private final ParticipantRepository participantRepository;
 
     private final TeamRepository teamRepository;
 
 
-    public TournamentServiceImpl(TournamentRepository tournamentRepository, Validator validator, User2Repository user2Repository, ParticipantRepository participantRepository, TeamRepository teamRepository) {
+    public TournamentServiceImpl(TournamentRepository tournamentRepository, Validator validator, UserRepository userRepository, ParticipantRepository participantRepository, TeamRepository teamRepository) {
         this.tournamentRepository = tournamentRepository;
         this.validator = validator;
-        this.user2Repository = user2Repository;
+        this.userRepository = userRepository;
         this.participantRepository = participantRepository;
         this.teamRepository = teamRepository;
     }
@@ -61,8 +61,8 @@ public class TournamentServiceImpl implements TournamentService {
         Set<ConstraintViolation<Tournament>> violations = validator.validate(tournament);
         if (!violations.isEmpty())
             throw new ResourceValidationException(ENTITY, violations);
-        User2 tournamentManager = user2Repository.getById(userId);
-        tournament.setUser2(tournamentManager);
+        User tournamentManager = userRepository.getById(userId);
+        tournament.setUser(tournamentManager);
         return tournamentRepository.save(tournament);
     }
 

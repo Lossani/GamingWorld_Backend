@@ -1,9 +1,9 @@
-package com.gamingworld.app.gamingworld.user.api;
+package com.gamingworld.app.gamingworld.security.config.api;
 
 import java.util.List;
 
-import com.gamingworld.app.gamingworld.user.domain.model.entity.User2;
-import com.gamingworld.app.gamingworld.user.service.UserServiceImpl;
+import com.gamingworld.app.gamingworld.security.domain.model.entity.User;
+import com.gamingworld.app.gamingworld.security.service.UserServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,12 +21,12 @@ public class UserController {
     private UserServiceImpl userService;
 
     @GetMapping(path = "")
-    public @ResponseBody List<User2> getAll(){
+    public @ResponseBody List<User> getAll(){
         return userService.getAll();
     }
 
-    @PostMapping(consumes = "application/json", produces = "application/json", path = "")
-    public User2 saveUser(@RequestBody User2 user2){
-        return userService.save(user2);
+    @PostMapping(path = "/signup",consumes = "application/json", produces = "application/json")
+    public User saveUser(@RequestBody User user){
+        return userService.save(user);
     }
 }

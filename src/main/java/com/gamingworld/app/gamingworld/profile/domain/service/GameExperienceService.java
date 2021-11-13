@@ -1,9 +1,9 @@
-package com.gamingworld.app.gamingworld.user.domain.service;
+package com.gamingworld.app.gamingworld.profile.domain.service;
 
 import java.util.List;
 import java.util.Optional;
 
-import com.gamingworld.app.gamingworld.user.domain.model.entity.GameExperience;
+import com.gamingworld.app.gamingworld.profile.domain.model.entity.GameExperience;
 
 public interface GameExperienceService {
     public List<GameExperience> getAll();

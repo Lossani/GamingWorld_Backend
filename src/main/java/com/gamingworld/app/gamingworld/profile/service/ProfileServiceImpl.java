@@ -1,13 +1,13 @@
-package com.gamingworld.app.gamingworld.user.service;
+package com.gamingworld.app.gamingworld.profile.service;
 
 import java.util.List;
 import java.util.Optional;
 
-import com.gamingworld.app.gamingworld.user.domain.model.entity.GameExperience;
-import com.gamingworld.app.gamingworld.user.domain.model.entity.Profile;
-import com.gamingworld.app.gamingworld.user.domain.persitence.GameExperienceRepository;
-import com.gamingworld.app.gamingworld.user.domain.persitence.ProfileRepository;
-import com.gamingworld.app.gamingworld.user.domain.service.ProfileService;
+import com.gamingworld.app.gamingworld.profile.domain.model.entity.GameExperience;
+import com.gamingworld.app.gamingworld.profile.domain.model.entity.Profile;
+import com.gamingworld.app.gamingworld.profile.domain.persitence.GameExperienceRepository;
+import com.gamingworld.app.gamingworld.profile.domain.persitence.ProfileRepository;
+import com.gamingworld.app.gamingworld.profile.domain.service.ProfileService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

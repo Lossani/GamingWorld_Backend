@@ -1,12 +1,12 @@
-package com.gamingworld.app.gamingworld.user.api;
+package com.gamingworld.app.gamingworld.profile.api;
 
 import java.util.List;
 
 import javax.websocket.server.PathParam;
 
-import com.gamingworld.app.gamingworld.user.domain.model.entity.GameExperience;
-import com.gamingworld.app.gamingworld.user.domain.model.entity.Profile;
-import com.gamingworld.app.gamingworld.user.domain.service.ProfileService;
+import com.gamingworld.app.gamingworld.profile.domain.model.entity.GameExperience;
+import com.gamingworld.app.gamingworld.profile.domain.model.entity.Profile;
+import com.gamingworld.app.gamingworld.profile.domain.service.ProfileService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

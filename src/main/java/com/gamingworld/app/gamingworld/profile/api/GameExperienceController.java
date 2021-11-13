@@ -1,12 +1,12 @@
-package com.gamingworld.app.gamingworld.user.api;
+package com.gamingworld.app.gamingworld.profile.api;
 
 import java.util.List;
 import java.util.Optional;
 
 import javax.websocket.server.PathParam;
 
-import com.gamingworld.app.gamingworld.user.domain.model.entity.GameExperience;
-import com.gamingworld.app.gamingworld.user.domain.service.GameExperienceService;
+import com.gamingworld.app.gamingworld.profile.domain.model.entity.GameExperience;
+import com.gamingworld.app.gamingworld.profile.domain.service.GameExperienceService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;

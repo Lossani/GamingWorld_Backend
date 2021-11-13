@@ -1,4 +1,4 @@
-package com.gamingworld.app.gamingworld.user.domain.model.entity;
+package com.gamingworld.app.gamingworld.profile.domain.model.entity;
 
 import java.util.List;
 
@@ -10,6 +10,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.gamingworld.app.gamingworld.security.domain.model.entity.User;
 import com.gamingworld.app.gamingworld.tournament.shared.model.AuditModel;
 
 import lombok.Getter;
@@ -27,7 +28,7 @@ public class Profile extends AuditModel {
 
     @OneToOne
     private @Getter @Setter
-    User2 user2;
+    User user;
 
     @OneToMany
     private @Getter @Setter List<GameExperience> gameExperiences;

@@ -1,4 +1,4 @@
-package com.gamingworld.app.gamingworld.user.domain.model.entity;
+package com.gamingworld.app.gamingworld.profile.domain.model.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

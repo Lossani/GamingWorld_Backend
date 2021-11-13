@@ -1,12 +1,18 @@
 package com.gamingworld.app.gamingworld.security.domain.model.entity;
 
 
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "users")
+@Getter
+@Setter
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +31,12 @@ public class User {
 
     @Column(length = 40, nullable = false)
     private String name;
+
+    @Column(nullable = false, unique = true)
+    private String email;
+
+    @Column
+    private Boolean premium = false;
 
     @Column(length = 30, nullable = false)
     private String role;
