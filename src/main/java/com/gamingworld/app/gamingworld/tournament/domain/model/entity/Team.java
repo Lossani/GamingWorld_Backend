@@ -6,7 +6,7 @@ import java.util.List;
 import javax.persistence.*;
 
 import com.gamingworld.app.gamingworld.tournament.shared.model.AuditModel;
-import com.gamingworld.app.gamingworld.user.domain.model.entity.Profile;
+import com.gamingworld.app.gamingworld.profile.domain.model.entity.Profile;
 
 import lombok.*;
 

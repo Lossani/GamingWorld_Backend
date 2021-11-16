@@ -3,7 +3,12 @@ spring:
         hibernate:
             ddl-auto: update
     datasource:
-        url: 'jdbc:mysql://127.0.0.1:3306/gamingworld_aos'
+        url: 'jdbc:mysql://127.0.0.1:3306/aostemp'
         username: root
         password: 123456
         driver-class-name: com.mysql.cj.jdbc.Driver
+    cors:
+        origins:
+            - http://localhost:4200
+            - https://app.mydomainnnn.com
+            - https://app.yourrrrdooomain.com
