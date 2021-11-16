@@ -1,4 +1,4 @@
-package com.gamingworld.app.gamingworld.tournament.shared.mapping;
+package com.gamingworld.app.gamingworld.shared.mapping;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

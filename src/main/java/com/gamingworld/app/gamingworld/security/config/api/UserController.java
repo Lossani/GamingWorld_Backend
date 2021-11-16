@@ -28,8 +28,6 @@ public class UserController {
         return userService.findByEmail(email);
     }
 
-
-
     @PostMapping(path = "/signup",consumes = "application/json", produces = "application/json")
     public User saveUser(@RequestBody User user){
         return userService.save(user);

@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 import com.gamingworld.app.gamingworld.game.domain.model.entity.Game;
 import com.gamingworld.app.gamingworld.security.domain.model.entity.User;
-import com.gamingworld.app.gamingworld.tournament.shared.model.AuditModel;
+import com.gamingworld.app.gamingworld.shared.model.AuditModel;
 
 import lombok.*;
 import org.springframework.lang.Nullable;

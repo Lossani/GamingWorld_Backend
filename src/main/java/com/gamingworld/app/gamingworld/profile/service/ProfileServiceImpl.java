@@ -2,6 +2,7 @@ package com.gamingworld.app.gamingworld.profile.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import com.gamingworld.app.gamingworld.profile.domain.model.entity.GameExperience;
 import com.gamingworld.app.gamingworld.profile.domain.model.entity.Profile;
@@ -9,12 +10,32 @@ import com.gamingworld.app.gamingworld.profile.domain.persitence.GameExperienceR
 import com.gamingworld.app.gamingworld.profile.domain.persitence.ProfileRepository;
 import com.gamingworld.app.gamingworld.profile.domain.service.ProfileService;
 
+import com.gamingworld.app.gamingworld.security.domain.model.entity.User;
+import com.gamingworld.app.gamingworld.security.domain.persistence.UserRepository;
+import com.gamingworld.app.gamingworld.shared.exception.ResourceNotFoundException;
+import com.gamingworld.app.gamingworld.shared.exception.ResourceValidationException;
+import com.gamingworld.app.gamingworld.tournament.domain.model.entity.Tournament;
+import com.gamingworld.app.gamingworld.tournament.domain.persitence.ParticipantRepository;
+import com.gamingworld.app.gamingworld.tournament.domain.persitence.TeamRepository;
+import com.gamingworld.app.gamingworld.tournament.domain.persitence.TournamentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
+
 @Service
 public class ProfileServiceImpl implements ProfileService{
-    
+    private final Validator validator;
+    private static final String ENTITY = "Profile";
+    private final UserRepository userRepository;
+
+
+    public ProfileServiceImpl(Validator validator, UserRepository userRepository) {
+        this.validator = validator;
+        this.userRepository = userRepository;
+    }
+
     @Autowired
     private ProfileRepository profileRepository;
 
@@ -27,8 +48,29 @@ public class ProfileServiceImpl implements ProfileService{
     }
 
     @Override
-    public Optional<Profile> findById(Long id) {
-        return profileRepository.findById(id);
+    public Profile findById(Long id) {
+        return profileRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(ENTITY, id));
+    }
+
+    @Override
+    public Profile create(Long userId, Profile profile) {
+        Set<ConstraintViolation<Profile>> violations = validator.validate(profile);
+        if (!violations.isEmpty())
+            throw new ResourceValidationException(ENTITY, violations);
+        User user = userRepository.getById(userId);
+        profile.setUser(user);
+        return profileRepository.save(profile);
+    }
+
+    @Override
+    public Profile updateById(Long profileId, Profile newProfile) {
+        Set<ConstraintViolation<Profile>> violations = validator.validate(newProfile);
+        if (!violations.isEmpty())
+            throw new ResourceValidationException(ENTITY, violations);
+
+        return profileRepository.findById(profileId).map(profile ->
+                profileRepository.save(profile)
+        ).orElseThrow(() -> new ResourceNotFoundException(ENTITY, profileId));
     }
 
     @Override

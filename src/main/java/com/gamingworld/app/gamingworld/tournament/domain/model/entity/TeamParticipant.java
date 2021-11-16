@@ -1,6 +1,6 @@
 package com.gamingworld.app.gamingworld.tournament.domain.model.entity;
 
-import com.gamingworld.app.gamingworld.tournament.shared.model.AuditModel;
+import com.gamingworld.app.gamingworld.shared.model.AuditModel;
 import com.gamingworld.app.gamingworld.profile.domain.model.entity.Profile;
 import lombok.*;
 
