@@ -19,7 +19,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "game_experience")
+@Table(name = "game_experiences")
 @NoArgsConstructor
 public class GameExperience {
     

@@ -10,10 +10,10 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "favourite_games")
+@Table(name = "favorite_games")
 @NoArgsConstructor
 
-public class FavouriteGame {
+public class FavoriteGame {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

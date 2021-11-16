@@ -8,20 +8,15 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "tournament_experiences")
-public class TournamnetExperience {
-
+@Table(name = "streaming_categories")
+public class StreamingCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column
     private String name;
-
-    @Column(nullable = false)
-    private Integer position;
 
     @ManyToOne()
     private Profile profile;
-
 }
