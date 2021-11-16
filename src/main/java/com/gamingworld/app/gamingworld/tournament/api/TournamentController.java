@@ -55,8 +55,8 @@ public class TournamentController {
     private TeamMapper teamMapper;
 
     @GetMapping
-    public Page<TournamentResource> getAllTournaments(Pageable pageable) {
-        return mapper.modelListToPage(tournamentService.getAll(), pageable);
+    public List<Tournament> getAllTournaments() {
+        return tournamentService.getAll();
     }
 
     @GetMapping("/user/{userId}")

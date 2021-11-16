@@ -3,6 +3,7 @@ package com.gamingworld.app.gamingworld.tournament.resource;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.lang.Nullable;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -23,4 +24,7 @@ public class CreateTournamentResource {
 
     @NotNull
     private Boolean isTeamMode;
+
+    @Nullable
+    private String urlToImage;
 }

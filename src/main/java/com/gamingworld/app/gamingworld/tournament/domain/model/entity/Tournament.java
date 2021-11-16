@@ -49,9 +49,13 @@ public class Tournament extends AuditModel implements Serializable{
     @Column
     private Boolean isTeamMode;
 
+
     @Column(length = 512)
     private String description;
 
     @Column(name = "prize_pool")
     private Integer prizePool;
+
+    @Column
+    private String urlToImage;
 }
