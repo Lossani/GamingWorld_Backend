@@ -16,7 +16,7 @@ import java.util.List;
 @Setter
 public class ProfileResource {
     private Long id;
-    private User user;
+    //private User user;
     private List<GameExperience> gameExperiences;
     private List<FavoriteGame> favouriteGames;
     private List<StreamerSponsor> streamerSponsors ;

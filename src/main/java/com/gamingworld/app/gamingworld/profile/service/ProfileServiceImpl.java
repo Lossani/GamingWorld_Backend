@@ -53,24 +53,24 @@ public class ProfileServiceImpl implements ProfileService{
     }
 
     @Override
-    public Profile create(Long userId, Profile profile) {
+    public Profile create(Profile profile) {
         Set<ConstraintViolation<Profile>> violations = validator.validate(profile);
         if (!violations.isEmpty())
             throw new ResourceValidationException(ENTITY, violations);
-        User user = userRepository.getById(userId);
+        User user = userRepository.getById(profile.getUser().getId());
         profile.setUser(user);
         return profileRepository.save(profile);
     }
 
     @Override
-    public Profile updateById(Long profileId, Profile newProfile) {
+    public Profile updateByUserId(Long userId, Profile newProfile) {
         Set<ConstraintViolation<Profile>> violations = validator.validate(newProfile);
         if (!violations.isEmpty())
             throw new ResourceValidationException(ENTITY, violations);
 
-        return profileRepository.findById(profileId).map(profile ->
+        return profileRepository.findByUserId(userId).map(profile ->
                 profileRepository.save(profile)
-        ).orElseThrow(() -> new ResourceNotFoundException(ENTITY, profileId));
+        ).orElseThrow(() -> new ResourceNotFoundException(ENTITY, userId));
     }
 
     @Override

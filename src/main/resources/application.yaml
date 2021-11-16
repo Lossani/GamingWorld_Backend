@@ -3,9 +3,9 @@ spring:
         hibernate:
             ddl-auto: update
     datasource:
-        url: 'jdbc:mysql://127.0.0.1:3306/aostemp'
-        username: root
-        password: 123456
+        url: 'jdbc:mysql://xempre.com:3306/gamingworld_aos'
+        username: external
+        password: XempreDB
         driver-class-name: com.mysql.cj.jdbc.Driver
     cors:
         origins:

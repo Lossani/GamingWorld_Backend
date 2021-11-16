@@ -13,14 +13,14 @@ import javax.persistence.Table;
 import com.gamingworld.app.gamingworld.security.domain.model.entity.User;
 import com.gamingworld.app.gamingworld.shared.model.AuditModel;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.With;
+import lombok.*;
 
 @Getter
 @Setter
 @With
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "profiles")
 public class Profile extends AuditModel {
     
@@ -43,9 +43,6 @@ public class Profile extends AuditModel {
 
     @OneToMany
     private @Getter @Setter List<TournamentExperience> tournamentExperiences ;
-
-    public Profile() {
-    }
 
     public void addGameExperience(GameExperience entity){
         gameExperiences.add(entity);

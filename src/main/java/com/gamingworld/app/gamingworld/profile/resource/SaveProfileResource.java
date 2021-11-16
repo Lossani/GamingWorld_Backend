@@ -15,8 +15,8 @@ import java.util.List;
 @Getter
 @Setter
 public class SaveProfileResource {
-    @NotNull
-    private Long userId;
+    //@NotNull
+    //private Long userId;
 
     // Relations
     private List<GameExperience> gameExperiences;
