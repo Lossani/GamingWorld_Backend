@@ -19,4 +19,14 @@ public class StreamingCategory {
 
     @ManyToOne()
     private Profile profile;
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this)
+            return true;
+        if (!(obj instanceof StreamingCategory))
+            return false;
+        StreamingCategory streamingCategory = (StreamingCategory) obj;
+        return streamingCategory.id.equals(id);
+    }
 }

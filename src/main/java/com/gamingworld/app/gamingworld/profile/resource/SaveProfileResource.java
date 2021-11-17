@@ -1,10 +1,7 @@
 package com.gamingworld.app.gamingworld.profile.resource;
 
 
-import com.gamingworld.app.gamingworld.profile.domain.model.entity.FavoriteGame;
-import com.gamingworld.app.gamingworld.profile.domain.model.entity.GameExperience;
-import com.gamingworld.app.gamingworld.profile.domain.model.entity.StreamerSponsor;
-import com.gamingworld.app.gamingworld.profile.domain.model.entity.TournamentExperience;
+import com.gamingworld.app.gamingworld.profile.domain.model.entity.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,6 +18,7 @@ public class SaveProfileResource {
     // Relations
     private List<GameExperience> gameExperiences;
     private List<FavoriteGame> favouriteGames;
-    private List<StreamerSponsor> streamerSponsors ;
-    private List<TournamentExperience> tournamentExperiences ;
+    private List<StreamerSponsor> streamerSponsors;
+    private List<TournamentExperience> tournamentExperiences;
+    private List<StreamingCategory> streamingCategories;
 }

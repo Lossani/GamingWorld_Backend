@@ -24,4 +24,13 @@ public class TournamentExperience {
     @ManyToOne()
     private Profile profile;
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this)
+            return true;
+        if (!(obj instanceof TournamentExperience))
+            return false;
+        TournamentExperience tournamentExperience = (TournamentExperience) obj;
+        return tournamentExperience.id.equals(id);
+    }
 }

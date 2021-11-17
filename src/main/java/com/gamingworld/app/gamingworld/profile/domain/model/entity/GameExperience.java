@@ -37,5 +37,15 @@ public class GameExperience {
     public GameExperience(Game game, Integer experience) {
         this.game = game;
         this.experience = experience;
-    }    
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this)
+            return true;
+        if (!(obj instanceof GameExperience))
+            return false;
+        GameExperience gameExperience = (GameExperience) obj;
+        return gameExperience.id.equals(id);
+    }
 }

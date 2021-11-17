@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.stream.Stream;
 
 @Getter
 @Setter
@@ -22,4 +23,13 @@ public class StreamerSponsor {
     @ManyToOne()
     private Profile profile;
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this)
+            return true;
+        if (!(obj instanceof StreamerSponsor))
+            return false;
+        StreamerSponsor streamerSponsor = (StreamerSponsor) obj;
+        return streamerSponsor.id.equals(id);
+    }
 }

@@ -33,21 +33,24 @@ public class Profile extends AuditModel {
     User user;
 
     @OneToMany
-    private @Getter @Setter List<GameExperience> gameExperiences;
+    private List<GameExperience> gameExperiences;
 
     @OneToMany
-    private @Getter @Setter List<FavoriteGame> favouriteGames;
+    private List<FavoriteGame> favoriteGames;
 
     @OneToMany
-    private @Getter @Setter List<StreamerSponsor> streamerSponsors ;
+    private List<StreamerSponsor> streamerSponsors;
 
     @OneToMany
-    private @Getter @Setter List<TournamentExperience> tournamentExperiences ;
+    private List<TournamentExperience> tournamentExperiences;
+
+    @OneToMany
+    private List<StreamingCategory> streamingCategories;
 
     public void addGameExperience(GameExperience entity){
         gameExperiences.add(entity);
     }
-    public void addFavouriteGames(FavoriteGame entity) { favouriteGames.add(entity); }
+    public void addFavouriteGames(FavoriteGame entity) { favoriteGames.add(entity); }
     public void addStreamerSponsor(StreamerSponsor entity) { streamerSponsors.add(entity); }
     public void addTournamentExperience(TournamentExperience entity) { tournamentExperiences.add(entity); }
 }

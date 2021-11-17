@@ -23,5 +23,14 @@ public class FavoriteGame {
     @JoinColumn(name = "game_id")
     private Game game;
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this)
+            return true;
+        if (!(obj instanceof FavoriteGame))
+            return false;
+        FavoriteGame favoriteGame = (FavoriteGame) obj;
+        return favoriteGame.id.equals(id);
+    }
 }
 
