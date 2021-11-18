@@ -77,7 +77,8 @@ public class TournamentServiceImpl implements TournamentService {
                 tournamentRepository.save(
                         tournament.withTitle(request.getTitle())
                                 .withDescription(request.getDescription())
-                                .withPrizePool(request.getPrizePool()))
+                                .withPrizePool(request.getPrizePool())
+                                )
         ).orElseThrow(() -> new ResourceNotFoundException(ENTITY, tournamentId));
     }
 

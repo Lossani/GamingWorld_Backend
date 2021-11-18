@@ -10,6 +10,7 @@ import lombok.*;
 import org.springframework.lang.Nullable;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -45,10 +46,8 @@ public class Tournament extends AuditModel implements Serializable{
     @Column
     private String title;
 
-    @NonNull
     @Column
     private Boolean isTeamMode;
-
 
     @Column(length = 512)
     private String description;
@@ -58,4 +57,11 @@ public class Tournament extends AuditModel implements Serializable{
 
     @Column
     private String urlToImage;
+
+    @Column
+    private Boolean tournamentStatus;
+
+    @Column
+    private Date tournamentDate;
+
 }
