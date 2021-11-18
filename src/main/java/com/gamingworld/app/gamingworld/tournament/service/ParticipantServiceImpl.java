@@ -64,6 +64,9 @@ public class ParticipantServiceImpl implements ParticipantService {
         if(tournamentRepository.findById(tournamentId).isEmpty())
             throw new ResourceNotFoundException(ENTITY, tournamentId);
 
+        if (getAllByTournamentId(tournamentId).stream().anyMatch(o->o.getParticipantProfile().getId().equals(participant.getParticipantProfile().getId())))
+            throw new ResourceNotFoundException("This participant is already registered in this tournament.");
+
         participant.setTournamentId(tournamentId);
 
         Set<ConstraintViolation<Participant>> violations = validator.validate(participant);

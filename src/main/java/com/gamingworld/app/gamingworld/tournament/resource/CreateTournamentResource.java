@@ -35,6 +35,12 @@ public class CreateTournamentResource {
     @NotNull
     private Boolean tournamentStatus;
 
+    @NotNull
+    private Integer tournamentCapacity;
+
+//    @NotNull
+//    private Integer gameId;
+
 
 
 

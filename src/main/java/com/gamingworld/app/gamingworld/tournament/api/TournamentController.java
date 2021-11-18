@@ -65,10 +65,8 @@ public class TournamentController {
     }
 
     @GetMapping("{tournamentId}")
-    public TournamentResource getTournamentById(@PathVariable("tournamentId") Long tournamentId) {
-
-
-        return tournamentMapper.toResource(tournamentService.getById(tournamentId));
+    public Tournament getTournamentById(@PathVariable("tournamentId") Long tournamentId) {
+        return tournamentService.getById(tournamentId);
     }
 
     @PostMapping("{userId}/create")
@@ -76,15 +74,11 @@ public class TournamentController {
         return tournamentMapper.toResource(tournamentService.create(userId,tournamentMapper.toModel(request)));
     }
 
+    // Participants
     @PostMapping("{tournamentId}/participants")
     public ParticipantResource createParticipantByTournamentId(@RequestBody CreateParticipantResource request, @PathVariable("tournamentId") Long tournamentId) {
 
         return participantMapper.toResource(participantService.create(tournamentId, participantMapper.toModel(request)));
-    }
-
-    @PutMapping("{tournamentId}/end")
-    public TournamentResource endTournament(@PathVariable("tournamentId") Long tournamentId){
-        return tournamentMapper.toResource(tournamentService.endTournament(tournamentId));
     }
 
     @GetMapping("{tournamentId}/participants")
@@ -155,6 +149,11 @@ public class TournamentController {
     @DeleteMapping("{tournamentId}")
     public ResponseEntity<?> deleteTournament(@PathVariable Long tournamentId) {
         return tournamentService.delete(tournamentId);
+    }
+
+    @PutMapping("{tournamentId}/end")
+    public TournamentResource endTournament(@PathVariable("tournamentId") Long tournamentId){
+        return tournamentMapper.toResource(tournamentService.endTournament(tournamentId));
     }
 
 }

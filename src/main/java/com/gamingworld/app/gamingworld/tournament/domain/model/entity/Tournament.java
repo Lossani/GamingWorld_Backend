@@ -1,6 +1,7 @@
 package com.gamingworld.app.gamingworld.tournament.domain.model.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 
 import com.gamingworld.app.gamingworld.game.domain.model.entity.Game;
 import com.gamingworld.app.gamingworld.security.domain.model.entity.User;
@@ -42,6 +43,9 @@ public class Tournament extends AuditModel implements Serializable{
     @Nullable
     @OneToMany()
     private List<Team> teamList;
+
+    @Column
+    private Integer tournamentCapacity;
 
     @Column
     private String title;
