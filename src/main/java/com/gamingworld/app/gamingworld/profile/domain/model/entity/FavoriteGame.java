@@ -19,9 +19,9 @@ public class FavoriteGame {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(targetEntity = Game.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "game_id")
-    private Game game;
+    //@ManyToOne(targetEntity = Game.class, fetch = FetchType.LAZY)
+    //@JoinColumn(name = "game_id")
+    private String game;
 
     @Override
     public boolean equals(Object obj) {

@@ -27,17 +27,12 @@ public class GameExperience {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(targetEntity = Game.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "game_id")
-    private Game game;
+    //@ManyToOne(targetEntity = Game.class, fetch = FetchType.LAZY)
+    //@JoinColumn(name = "game_id")
+    private String game;
 
     @Column(nullable = false)
     private Integer experience;
-
-    public GameExperience(Game game, Integer experience) {
-        this.game = game;
-        this.experience = experience;
-    }
 
     @Override
     public boolean equals(Object obj) {

@@ -9,11 +9,7 @@ import com.gamingworld.app.gamingworld.game.domain.model.entity.Game;
 import com.gamingworld.app.gamingworld.game.domain.service.GameService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/api/v1/games")
@@ -28,7 +24,7 @@ public class GameController {
     }
 
     @GetMapping(path = "/{id}")
-    public Optional<Game> findById(@PathParam(value = "id") Long id) {
+    public Optional<Game> findById(@PathVariable Long id) {
         return gameService.findById(id);
     }
 

@@ -17,22 +17,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Entity
-@Table(name = "game")
-@NoArgsConstructor
-@RequiredArgsConstructor
-public class Game extends AuditModel {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+public class Game{
 
-    @Column(nullable = false)
-    @NonNull private String title;
+    @NonNull private Long id;
 
-    @Column
-    @NonNull private String description;
-
-    @Column(name = "image_url")
-    @NonNull private String imageUrl;
+    @NonNull private String name;
 }

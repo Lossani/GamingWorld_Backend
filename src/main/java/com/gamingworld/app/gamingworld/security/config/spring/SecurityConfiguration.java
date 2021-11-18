@@ -82,6 +82,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/v1/tournaments/**").permitAll()
                 .antMatchers("/api/v1/profiles").permitAll()
                 .antMatchers("/api/v1/profiles/**").permitAll()
+                .antMatchers("/api/v1/games").permitAll()
+                .antMatchers("/api/v1/games/**").permitAll()
                 // configure access rules
                 .anyRequest().authenticated().and()
                 .exceptionHandling().and()

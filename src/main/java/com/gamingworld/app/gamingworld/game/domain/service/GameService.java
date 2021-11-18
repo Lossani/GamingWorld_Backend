@@ -9,4 +9,5 @@ public interface GameService {
     public List<Game> getAll();
     public Optional<Game> findById(Long id);
     public Game save(Game entity);
+    public void getIGDBCredentials();
 }

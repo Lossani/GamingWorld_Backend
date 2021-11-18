@@ -30,8 +30,8 @@ public class Tournament extends AuditModel implements Serializable{
     @OneToOne()
     private User user;
 
-    @OneToOne()
-    private Game game;
+    //@OneToOne()
+    private String game;
 
     @Nullable
     @OneToMany()
