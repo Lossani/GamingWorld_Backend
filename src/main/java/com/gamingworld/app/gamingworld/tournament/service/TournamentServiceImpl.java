@@ -121,4 +121,11 @@ public class TournamentServiceImpl implements TournamentService {
         }).orElseThrow(() -> new ResourceNotFoundException(ENTITY, participantId));
 
     }
+
+    @Override
+    public Tournament endTournament(Long tournamentId) {
+        Tournament tournament = tournamentRepository.getById(tournamentId);
+        tournament.setTournamentStatus(false);
+        return tournamentRepository.save(tournament);
+    }
 }
