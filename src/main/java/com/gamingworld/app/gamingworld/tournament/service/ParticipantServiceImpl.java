@@ -106,7 +106,8 @@ public class ParticipantServiceImpl implements ParticipantService {
     @Override
     public Boolean validateParticipantInTournament(Long tournamentId, Long participantId) {
         Participant participant = participantRepository.getById(participantId);
-        return getAllByTournamentId(tournamentId).stream().anyMatch(o->o.getParticipantProfile().getId().equals(participant.getParticipantProfile().getId()));
+        return getAllByTournamentId(tournamentId).stream().anyMatch(o->o.getParticipantProfile().getId().equals(participant.getParticipantProfile().getId())) && getAllByTournamentId(tournamentId).size() < tournamentRepository.getById(tournamentId).getTournamentCapacity();
     }
+
 
 }
