@@ -1,6 +1,5 @@
 package com.gamingworld.app.gamingworld.profile.domain.model.entity;
 
-import com.gamingworld.app.gamingworld.game.domain.model.entity.Game;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

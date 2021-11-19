@@ -9,12 +9,16 @@ import com.gamingworld.app.gamingworld.security.domain.model.entity.User;
 import com.gamingworld.app.gamingworld.security.domain.persistence.UserRepository;
 import com.gamingworld.app.gamingworld.security.domain.service.UserService;
 
+import com.gamingworld.app.gamingworld.shared.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -52,5 +56,13 @@ public class UserServiceImpl implements UserService {
 
         profileRepository.save(newProfile);
         return newUser;
+    }
+
+    @Override
+    public User loadUserByUsername(String username) throws UsernameNotFoundException {
+        // Retornando el usuario
+        Optional<User> userFound = this.userRepository.findByUsername(username);
+
+        return userFound.orElseThrow(() -> new ResourceNotFoundException("User not found."));
     }
 }

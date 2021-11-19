@@ -3,6 +3,7 @@ package com.gamingworld.app.gamingworld.security.config.spring;
 import com.gamingworld.app.gamingworld.security.config.jwt.JwtAuthenticationFilter;
 import com.gamingworld.app.gamingworld.security.config.jwt.JwtAuthorizationFilter;
 import com.gamingworld.app.gamingworld.security.domain.persistence.UserRepository;
+import com.gamingworld.app.gamingworld.security.domain.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +15,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -30,7 +32,7 @@ import java.util.List;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private UserService userService;
 
     @Autowired
     private UserRepository userRepository;
@@ -43,7 +45,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     DaoAuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-        daoAuthenticationProvider.setUserDetailsService(this.userDetailsService);
+        daoAuthenticationProvider.setUserDetailsService((UserDetailsService)userService);
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
 
         return daoAuthenticationProvider;
@@ -68,23 +70,23 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        AuthenticationEntryPoint authenticationEntryPoint = null;
+        final JwtAuthenticationFilter filter = new JwtAuthenticationFilter(authenticationManager());
+        filter.setFilterProcessesUrl("/api/v1/users/login");
         http
                 // remove csrf and state in session because in jwt we do not need them
                 .cors().and()
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/api/v1/users/signup").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/auth/**").permitAll()
                 // configure access rules
-                .anyRequest().permitAll().and()
+                .anyRequest().permitAll().and() // CHANGE TO AUTHENTICATED FOR RELEASE
                 .exceptionHandling().and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http
                 // add jwt filters (1. authentication, 2. authorization)
-                .addFilter(new JwtAuthenticationFilter(authenticationManager()))
+                .addFilter(filter)
                 .addFilter(new JwtAuthorizationFilter(authenticationManager(),  this.userRepository));
     }
 }

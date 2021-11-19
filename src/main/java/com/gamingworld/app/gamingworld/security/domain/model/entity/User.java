@@ -13,7 +13,7 @@ import java.util.List;
 @Table(name = "users")
 @Getter
 @Setter
-public class User {
+public class User implements org.springframework.security.core.userdetails.UserDetails{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -43,6 +43,32 @@ public class User {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Authority> authorities;
+
+    private Boolean enabled = true;
+
+    private Boolean accountNonExpired = true;
+    private Boolean credentialsNonExpired = true;
+    private Boolean accountNonLocked = true;
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return this.isEnable();
+    }
 
     public User() {
         this.enable = true;

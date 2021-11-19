@@ -1,12 +1,13 @@
 package com.gamingworld.app.gamingworld.security.config.jwt;
 
 import com.auth0.jwt.JWT;
-import com.gamingworld.app.gamingworld.security.config.spring.UserDetails;
+import com.gamingworld.app.gamingworld.security.domain.model.entity.Authority;
 import com.gamingworld.app.gamingworld.security.domain.model.entity.User;
 import com.gamingworld.app.gamingworld.security.domain.persistence.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
@@ -15,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Optional;
 
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
@@ -63,8 +65,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
             if (userName != null) {
                 Optional<User> user = userRepository.findByUsername(userName);
                 if(user.isPresent()) {
-                    UserDetails principal = new UserDetails(user.get());
-                    UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userName, null, principal.getAuthorities());
+                    UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userName, null, user.get().getAuthorities());
                     return auth;
                 }
                 return null;
