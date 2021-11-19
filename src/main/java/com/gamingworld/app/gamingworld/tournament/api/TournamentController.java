@@ -81,6 +81,12 @@ public class TournamentController {
         return participantMapper.toResource(participantService.create(tournamentId, participantMapper.toModel(request)));
     }
 
+    @GetMapping("{tournamentId}/participants/{participantId}/validate")
+    public Boolean validateParticipantTournament(@PathVariable("tournamentId") Long tournamentId, @PathVariable("participantId") Long participantId){
+        return participantService.validateParticipantInTournament(tournamentId, participantId);
+    }
+
+
     @GetMapping("{tournamentId}/participants")
     public List<Participant> getAllParticipantsByTournamentId(@PathVariable("tournamentId") Long tournamentId) {
         return participantService.getAllByTournamentId(tournamentId);

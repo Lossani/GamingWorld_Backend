@@ -7,6 +7,7 @@ import com.gamingworld.app.gamingworld.tournament.domain.persitence.TournamentRe
 import com.gamingworld.app.gamingworld.tournament.domain.service.ParticipantService;
 import com.gamingworld.app.gamingworld.shared.exception.ResourceNotFoundException;
 import com.gamingworld.app.gamingworld.shared.exception.ResourceValidationException;
+import com.gamingworld.app.gamingworld.tournament.resource.ParticipantResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -101,4 +102,11 @@ public class ParticipantServiceImpl implements ParticipantService {
     public List<Participant> getTournamentsByUserId(Long userId) {
         return null;
     }
+
+    @Override
+    public Boolean validateParticipantInTournament(Long tournamentId, Long participantId) {
+        Participant participant = participantRepository.getById(participantId);
+        return getAllByTournamentId(tournamentId).stream().anyMatch(o->o.getParticipantProfile().getId().equals(participant.getParticipantProfile().getId()));
+    }
+
 }
