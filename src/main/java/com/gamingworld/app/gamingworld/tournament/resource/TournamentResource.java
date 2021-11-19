@@ -12,4 +12,5 @@ public class TournamentResource {
     private String description;
     private Number prizePool;
     private Boolean isTeamMode;
+    private String urlToImage;
 }

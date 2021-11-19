@@ -6,8 +6,8 @@ import com.gamingworld.app.gamingworld.tournament.domain.model.entity.Participan
 import com.gamingworld.app.gamingworld.tournament.domain.model.entity.Team;
 import com.gamingworld.app.gamingworld.tournament.domain.persitence.ParticipantRepository;
 import com.gamingworld.app.gamingworld.tournament.domain.persitence.TeamRepository;
-import com.gamingworld.app.gamingworld.tournament.shared.exception.ResourceNotFoundException;
-import com.gamingworld.app.gamingworld.tournament.shared.exception.ResourceValidationException;
+import com.gamingworld.app.gamingworld.shared.exception.ResourceNotFoundException;
+import com.gamingworld.app.gamingworld.shared.exception.ResourceValidationException;
 import com.gamingworld.app.gamingworld.tournament.domain.model.entity.Tournament;
 import com.gamingworld.app.gamingworld.tournament.domain.persitence.TournamentRepository;
 import com.gamingworld.app.gamingworld.tournament.domain.service.TournamentService;

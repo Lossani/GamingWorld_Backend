@@ -4,16 +4,14 @@ import java.util.List;
 
 import javax.websocket.server.PathParam;
 
-import com.gamingworld.app.gamingworld.profile.domain.model.entity.GameExperience;
 import com.gamingworld.app.gamingworld.profile.domain.model.entity.Profile;
 import com.gamingworld.app.gamingworld.profile.domain.service.ProfileService;
 
+import com.gamingworld.app.gamingworld.profile.mapping.ProfileMapper;
+import com.gamingworld.app.gamingworld.profile.resource.ProfileResource;
+import com.gamingworld.app.gamingworld.profile.resource.SaveProfileResource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/api/v1/profiles")
@@ -22,14 +20,28 @@ public class ProfileController {
     @Autowired
     private ProfileService profileService;
 
+    @Autowired
+    private ProfileMapper mapper;
+
     @GetMapping(path = "")
     public List<Profile> getAll(){
         return profileService.getAll();
     }
 
-    @PostMapping(path = "/{id}/game-experiences")
-    public GameExperience addGameExperience(@RequestBody GameExperience gameExperience,
-        @PathParam("id") Long id){
-        return profileService.addGameExperience(gameExperience, id);
+    @GetMapping(path = "/{id}")
+    public Profile getById(@PathVariable("id") Long profileId){
+        return profileService.findById(profileId);
+    }
+
+    /* We automatically create a profile for new users, so we do not need extra profiles for now.
+    @PostMapping(path = "")
+    public ProfileResource create(@RequestBody SaveProfileResource profile){
+        return mapper.toResource(profileService.create(mapper.toModel(profile)));
+    }
+    */
+
+    @PutMapping(path = "/{userId}")
+    public ProfileResource updateByUserId(@PathParam("userId") Long userId, @RequestBody SaveProfileResource profile){
+        return mapper.toResource(profileService.updateByUserId(userId, mapper.toModel(profile)));
     }
 }

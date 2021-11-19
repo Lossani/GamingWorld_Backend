@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 import com.gamingworld.app.gamingworld.game.domain.model.entity.Game;
 import com.gamingworld.app.gamingworld.security.domain.model.entity.User;
-import com.gamingworld.app.gamingworld.tournament.shared.model.AuditModel;
+import com.gamingworld.app.gamingworld.shared.model.AuditModel;
 
 import lombok.*;
 import org.springframework.lang.Nullable;
@@ -30,8 +30,8 @@ public class Tournament extends AuditModel implements Serializable{
     @OneToOne()
     private User user;
 
-    @OneToOne()
-    private Game game;
+    //@OneToOne()
+    private String game;
 
     @Nullable
     @OneToMany()
@@ -49,9 +49,13 @@ public class Tournament extends AuditModel implements Serializable{
     @Column
     private Boolean isTeamMode;
 
+
     @Column(length = 512)
     private String description;
 
     @Column(name = "prize_pool")
     private Integer prizePool;
+
+    @Column
+    private String urlToImage;
 }

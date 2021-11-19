@@ -1,4 +1,4 @@
-package com.gamingworld.app.gamingworld.tournament.shared.model;
+package com.gamingworld.app.gamingworld.shared.model;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -35,5 +35,4 @@ public abstract class AuditModel implements Serializable{
     @Column(name = "updated_at", nullable = false)
     @LastModifiedDate
     private Date updatedAt;
-
 }

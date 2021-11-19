@@ -9,11 +9,7 @@ import com.gamingworld.app.gamingworld.game.domain.model.entity.Game;
 import com.gamingworld.app.gamingworld.game.domain.service.GameService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/api/v1/games")
@@ -23,17 +19,17 @@ public class GameController {
     private GameService gameService;
 
     @GetMapping(path = "")
-    public List<Game> getAll() {
-        return gameService.getAll();
+    public List<Game> getRandomList() {
+        return gameService.getRandomList(10);
     }
 
     @GetMapping(path = "/{id}")
-    public Optional<Game> findById(@PathParam(value = "id") Long id) {
+    public Optional<Game> findById(@PathVariable Long id) {
         return gameService.findById(id);
     }
 
-    @PostMapping(path = "")
-    public Game save(@RequestBody Game entity){
-        return gameService.save(entity);
+    @GetMapping(path = "/find", params = {"name"})
+    public List<Game> findByName(@RequestParam("name") String name) {
+        return gameService.findByName(name, 10);
     }
 }

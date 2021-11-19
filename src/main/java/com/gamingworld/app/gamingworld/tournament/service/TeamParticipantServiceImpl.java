@@ -5,8 +5,8 @@ import com.gamingworld.app.gamingworld.tournament.domain.model.entity.TeamPartic
 import com.gamingworld.app.gamingworld.tournament.domain.persitence.TeamParticipantRepository;
 import com.gamingworld.app.gamingworld.tournament.domain.persitence.TournamentRepository;
 import com.gamingworld.app.gamingworld.tournament.domain.service.TeamParticipantService;
-import com.gamingworld.app.gamingworld.tournament.shared.exception.ResourceNotFoundException;
-import com.gamingworld.app.gamingworld.tournament.shared.exception.ResourceValidationException;
+import com.gamingworld.app.gamingworld.shared.exception.ResourceNotFoundException;
+import com.gamingworld.app.gamingworld.shared.exception.ResourceValidationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 

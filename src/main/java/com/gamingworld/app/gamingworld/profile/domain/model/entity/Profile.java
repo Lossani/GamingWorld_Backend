@@ -11,15 +11,17 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.gamingworld.app.gamingworld.security.domain.model.entity.User;
-import com.gamingworld.app.gamingworld.tournament.shared.model.AuditModel;
+import com.gamingworld.app.gamingworld.shared.model.AuditModel;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+@With
 @Entity
-@Table(name = "profile")
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "profiles")
 public class Profile extends AuditModel {
     
     @Id
@@ -31,12 +33,24 @@ public class Profile extends AuditModel {
     User user;
 
     @OneToMany
-    private @Getter @Setter List<GameExperience> gameExperiences;
+    private List<GameExperience> gameExperiences;
 
-    public Profile() {
-    }
+    @OneToMany
+    private List<FavoriteGame> favoriteGames;
+
+    @OneToMany
+    private List<StreamerSponsor> streamerSponsors;
+
+    @OneToMany
+    private List<TournamentExperience> tournamentExperiences;
+
+    @OneToMany
+    private List<StreamingCategory> streamingCategories;
 
     public void addGameExperience(GameExperience entity){
         gameExperiences.add(entity);
     }
+    public void addFavouriteGames(FavoriteGame entity) { favoriteGames.add(entity); }
+    public void addStreamerSponsor(StreamerSponsor entity) { streamerSponsors.add(entity); }
+    public void addTournamentExperience(TournamentExperience entity) { tournamentExperiences.add(entity); }
 }

@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.gamingworld.app.gamingworld.tournament.shared.model.AuditModel;
+import com.gamingworld.app.gamingworld.shared.model.AuditModel;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,22 +17,12 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Entity
-@Table(name = "game")
-@NoArgsConstructor
-@RequiredArgsConstructor
-public class Game extends AuditModel {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+public class Game{
 
-    @Column(nullable = false)
-    @NonNull private String title;
+    @NonNull private Long id;
 
-    @Column
-    @NonNull private String description;
+    @NonNull private String name;
 
-    @Column(name = "image_url")
-    @NonNull private String imageUrl;
+    private GameCover cover;
 }
+
