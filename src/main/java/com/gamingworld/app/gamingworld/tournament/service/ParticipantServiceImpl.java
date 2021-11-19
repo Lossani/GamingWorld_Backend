@@ -7,6 +7,7 @@ import com.gamingworld.app.gamingworld.tournament.domain.persitence.TournamentRe
 import com.gamingworld.app.gamingworld.tournament.domain.service.ParticipantService;
 import com.gamingworld.app.gamingworld.shared.exception.ResourceNotFoundException;
 import com.gamingworld.app.gamingworld.shared.exception.ResourceValidationException;
+import com.gamingworld.app.gamingworld.tournament.resource.ParticipantResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -64,6 +65,9 @@ public class ParticipantServiceImpl implements ParticipantService {
         if(tournamentRepository.findById(tournamentId).isEmpty())
             throw new ResourceNotFoundException(ENTITY, tournamentId);
 
+        if (getAllByTournamentId(tournamentId).stream().anyMatch(o->o.getParticipantProfile().getId().equals(participant.getParticipantProfile().getId())))
+            throw new ResourceNotFoundException("This participant is already registered in this tournament.");
+
         participant.setTournamentId(tournamentId);
 
         Set<ConstraintViolation<Participant>> violations = validator.validate(participant);
@@ -98,4 +102,12 @@ public class ParticipantServiceImpl implements ParticipantService {
     public List<Participant> getTournamentsByUserId(Long userId) {
         return null;
     }
+
+    @Override
+    public Boolean validateParticipantInTournament(Long tournamentId, Long participantId) {
+        Participant participant = participantRepository.getById(participantId);
+        return getAllByTournamentId(tournamentId).stream().anyMatch(o->o.getParticipantProfile().getId().equals(participant.getParticipantProfile().getId())) && getAllByTournamentId(tournamentId).size() < tournamentRepository.getById(tournamentId).getTournamentCapacity();
+    }
+
+
 }

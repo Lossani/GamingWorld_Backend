@@ -1,6 +1,7 @@
 package com.gamingworld.app.gamingworld.tournament.domain.model.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 
 import com.gamingworld.app.gamingworld.game.domain.model.entity.Game;
 import com.gamingworld.app.gamingworld.security.domain.model.entity.User;
@@ -10,6 +11,7 @@ import lombok.*;
 import org.springframework.lang.Nullable;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -43,12 +45,13 @@ public class Tournament extends AuditModel implements Serializable{
     private List<Team> teamList;
 
     @Column
+    private Integer tournamentCapacity;
+
+    @Column
     private String title;
 
-    @NonNull
     @Column
     private Boolean isTeamMode;
-
 
     @Column(length = 512)
     private String description;
@@ -58,4 +61,11 @@ public class Tournament extends AuditModel implements Serializable{
 
     @Column
     private String urlToImage;
+
+    @Column
+    private Boolean tournamentStatus;
+
+    @Column
+    private Date tournamentDate;
+
 }

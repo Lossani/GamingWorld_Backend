@@ -77,7 +77,8 @@ public class TournamentServiceImpl implements TournamentService {
                 tournamentRepository.save(
                         tournament.withTitle(request.getTitle())
                                 .withDescription(request.getDescription())
-                                .withPrizePool(request.getPrizePool()))
+                                .withPrizePool(request.getPrizePool())
+                                )
         ).orElseThrow(() -> new ResourceNotFoundException(ENTITY, tournamentId));
     }
 
@@ -119,5 +120,12 @@ public class TournamentServiceImpl implements TournamentService {
             return ResponseEntity.ok().build();
         }).orElseThrow(() -> new ResourceNotFoundException(ENTITY, participantId));
 
+    }
+
+    @Override
+    public Tournament endTournament(Long tournamentId) {
+        Tournament tournament = tournamentRepository.getById(tournamentId);
+        tournament.setTournamentStatus(false);
+        return tournamentRepository.save(tournament);
     }
 }
