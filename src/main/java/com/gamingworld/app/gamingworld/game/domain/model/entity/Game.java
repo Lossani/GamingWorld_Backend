@@ -22,4 +22,7 @@ public class Game{
     @NonNull private Long id;
 
     @NonNull private String name;
+
+    private GameCover cover;
 }
+

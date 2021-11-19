@@ -53,8 +53,13 @@ public class GameServiceImpl implements GameService {
     private GameMapper gameMapper;
 
     @Override
-    public List<Game> getAll() {
-        return null;
+    public List<Game> getRandomList(Integer limit) {
+        if (limit == null)
+            limit = 10;
+
+        String result = makeRequestToIGDB("fields name, cover.url; sort date desc; limit " + limit + ";");
+
+        return gameMapper.toModelList(result);
     }
 
     @Override
@@ -64,59 +69,31 @@ public class GameServiceImpl implements GameService {
             return Optional.empty();
         }
 
-        ExternalAPI credentials = externalAPIRepository.findByExternalAPIName("TWITCH_AUTH").get(0);
+        String result = makeRequestToIGDB("fields name, cover.url; where id=" + id + ";");
 
-        if (credentials == null)
-        {
-            getIGDBCredentials();
-        }
-        else
-        {
-            Date today = new Date();
+        result = result.substring(1, result.length() - 1); // We get response as an Array, so we need to remove those brackets
 
-            if (today.getTime() >= credentials.getExpirationDate().getTime())
-            {
-                getIGDBCredentials();
-                credentials = externalAPIRepository.findByExternalAPIName("TWITCH_AUTH").get(0);
-            }
-        }
+        Game gameRetrieved = gameMapper.toModel(result);
 
-        try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
-            HttpPost httpPost = new HttpPost(IGDB_GAMES_ENDPOINT);
-
-            StringEntity requestEntity = new StringEntity(
-                    "fields name; where id=" + id + ";",
-                    ContentType.APPLICATION_JSON);
-            
-            httpPost.setEntity(requestEntity);
-            httpPost.setHeader("Authorization", "Bearer " + credentials.getToken());
-            httpPost.setHeader("Client-ID", "8en9cck6wbdrkinl4i0oahhxf3ali1");
-
-            try (CloseableHttpResponse response = httpclient.execute(httpPost)) {
-
-                System.out.println("Response from IGDB API Games Endpoint was: " + response.getCode());
-
-                String result = getResponseBodyFromRequest(response);
-                result = result.substring(1, result.length() - 1); // We get response as an Array, so we need to remove those brackets.
-
-                Game gameRetrieved = gameMapper.toModel(result);
-
-                return Optional.ofNullable(gameRetrieved);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return Optional.empty();
+        return Optional.ofNullable(gameRetrieved);
     }
 
     @Override
-    public Game save(Game entity) {
-        return new Game();
+    public List<Game> findByName(String name, Integer limit)
+    {
+        if (name == null || name.isEmpty())
+        {
+            return List.of();
+        }
+        if (limit == null)
+            limit = 10;
+
+        String result = makeRequestToIGDB("fields name, cover.url; search \"" + name + "\"; limit " + limit + ";");
+
+        return gameMapper.toModelList(result);
     }
 
-    @Override
-    public void getIGDBCredentials() {
+    public void getNewIGDBCredentials() {
         try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
             HttpPost httpPost = new HttpPost(TWITCH_API_CREDENTIALS_URL);
 
@@ -147,5 +124,54 @@ public class GameServiceImpl implements GameService {
         }
 
         return result.toString();
+    }
+
+    private String makeRequestToIGDB(String requestBody)
+    {
+        ExternalAPI credentials = getIGDBCredentials();
+
+        try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
+            HttpPost httpPost = new HttpPost(IGDB_GAMES_ENDPOINT);
+
+            StringEntity requestEntity = new StringEntity(
+                    requestBody,
+                    ContentType.APPLICATION_JSON);
+
+            httpPost.setEntity(requestEntity);
+            httpPost.setHeader("Authorization", "Bearer " + credentials.getToken());
+            httpPost.setHeader("Client-ID", "8en9cck6wbdrkinl4i0oahhxf3ali1");
+
+            try (CloseableHttpResponse response = httpclient.execute(httpPost)) {
+
+                System.out.println("Response from IGDB API Games Endpoint was: " + response.getCode());
+
+                return getResponseBodyFromRequest(response);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    private ExternalAPI getIGDBCredentials()
+    {
+        ExternalAPI credentials = externalAPIRepository.findByExternalAPIName("TWITCH_AUTH").get(0);
+
+        if (credentials == null)
+        {
+            getNewIGDBCredentials();
+        }
+        else
+        {
+            Date today = new Date();
+
+            if (today.getTime() >= credentials.getExpirationDate().getTime())
+            {
+                getNewIGDBCredentials();
+                credentials = externalAPIRepository.findByExternalAPIName("TWITCH_AUTH").get(0);
+            }
+        }
+
+        return credentials;
     }
 }

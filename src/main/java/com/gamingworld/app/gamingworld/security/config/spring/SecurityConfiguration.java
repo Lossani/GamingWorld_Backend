@@ -76,16 +76,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/api/v1/users/signup").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/auth/**").permitAll()
-                .antMatchers("/api/v1/users").permitAll()
-                .antMatchers("/api/v1/users/**").permitAll()
-                .antMatchers("/api/v1/tournaments").permitAll()
-                .antMatchers("/api/v1/tournaments/**").permitAll()
-                .antMatchers("/api/v1/profiles").permitAll()
-                .antMatchers("/api/v1/profiles/**").permitAll()
-                .antMatchers("/api/v1/games").permitAll()
-                .antMatchers("/api/v1/games/**").permitAll()
                 // configure access rules
-                .anyRequest().authenticated().and()
+                .anyRequest().permitAll().and()
                 .exceptionHandling().and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);

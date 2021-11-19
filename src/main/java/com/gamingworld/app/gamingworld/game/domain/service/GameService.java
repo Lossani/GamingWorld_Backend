@@ -6,8 +6,7 @@ import java.util.Optional;
 import com.gamingworld.app.gamingworld.game.domain.model.entity.Game;
 
 public interface GameService {
-    public List<Game> getAll();
+    public List<Game> getRandomList(Integer limit);
     public Optional<Game> findById(Long id);
-    public Game save(Game entity);
-    public void getIGDBCredentials();
+    public List<Game> findByName(String name, Integer limit);
 }

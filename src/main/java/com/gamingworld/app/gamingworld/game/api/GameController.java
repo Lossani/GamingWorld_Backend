@@ -19,8 +19,8 @@ public class GameController {
     private GameService gameService;
 
     @GetMapping(path = "")
-    public List<Game> getAll() {
-        return gameService.getAll();
+    public List<Game> getRandomList() {
+        return gameService.getRandomList(10);
     }
 
     @GetMapping(path = "/{id}")
@@ -28,8 +28,8 @@ public class GameController {
         return gameService.findById(id);
     }
 
-    @PostMapping(path = "")
-    public Game save(@RequestBody Game entity){
-        return gameService.save(entity);
+    @GetMapping(path = "/find", params = {"name"})
+    public List<Game> findByName(@RequestParam("name") String name) {
+        return gameService.findByName(name, 10);
     }
 }
