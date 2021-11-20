@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gamingworld.app.gamingworld.profile.domain.model.entity.*;
 import com.gamingworld.app.gamingworld.profile.domain.persitence.*;
 import com.gamingworld.app.gamingworld.profile.domain.service.ProfileService;
@@ -78,19 +79,47 @@ public class ProfileServiceImpl implements ProfileService{
         if (!userRepository.existsById(userId))
             throw new ResourceNotFoundException("USER", userId);
 
+
         Profile currentProfile = profileRepository.findByUserId(userId).orElseThrow(() -> new ResourceNotFoundException(ENTITY, userId));
 
-        gameExperienceRepository.saveAll(newProfile.getGameExperiences());
-        favoriteGameRepository.saveAll(newProfile.getFavoriteGames());
-        streamerSponsorRepository.saveAll(newProfile.getStreamerSponsors());
-        streamingCategoryRepository.saveAll(newProfile.getStreamingCategories());
-        tournamentExperienceRepository.saveAll(newProfile.getTournamentExperiences());
+        if(newProfile.getId() == null)
+            newProfile.setId(currentProfile.getId());
+
+        for (GameExperience gameExperience:
+        newProfile.getGameExperiences()) {
+            gameExperience.setProfile(currentProfile);
+        }
+        for (FavoriteGame favoriteGame:
+                newProfile.getFavoriteGames()) {
+            favoriteGame.setProfile(currentProfile);
+        }
+        for (StreamerSponsor streamerSponsor:
+                newProfile.getStreamerSponsors()) {
+            streamerSponsor.setProfile(currentProfile);
+        }
+        for (StreamingCategory streamingCategory:
+                newProfile.getStreamingCategories()) {
+            streamingCategory.setProfile(currentProfile);
+        }
+        for (TournamentExperience tournamentExperience:
+                newProfile.getTournamentExperiences()) {
+            tournamentExperience.setProfile(currentProfile);
+        }
 
         // We delete previous elements that are non present in the update request
 
         List<GameExperience> deletedGameExperiences = currentProfile.getGameExperiences();
-        deletedGameExperiences.removeAll(newProfile.getGameExperiences());
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonUser = "";
 
+        try {
+            jsonUser = mapper.writeValueAsString(deletedGameExperiences);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(jsonUser);
+        deletedGameExperiences.removeAll(newProfile.getGameExperiences());
+        System.out.println(deletedGameExperiences.size());
         List<FavoriteGame> deletedFavoriteGames = currentProfile.getFavoriteGames();
         deletedFavoriteGames.removeAll(newProfile.getFavoriteGames());
 
@@ -103,12 +132,16 @@ public class ProfileServiceImpl implements ProfileService{
         List<TournamentExperience> deletedTournamentExperiences = currentProfile.getTournamentExperiences();
         deletedTournamentExperiences.removeAll(newProfile.getTournamentExperiences());
 
-        gameExperienceRepository.deleteAll(deletedGameExperiences);
-        favoriteGameRepository.deleteAll(deletedFavoriteGames);
-        streamerSponsorRepository.deleteAll(deletedStreamerSponsors);
-        streamingCategoryRepository.deleteAll(deletedStreamingCategories);
-        tournamentExperienceRepository.deleteAll(deletedTournamentExperiences);
+        gameExperienceRepository.deleteAllInBatch(deletedGameExperiences);
+        favoriteGameRepository.deleteAllInBatch(deletedFavoriteGames);
+        streamerSponsorRepository.deleteAllInBatch(deletedStreamerSponsors);
+        streamingCategoryRepository.deleteAllInBatch(deletedStreamingCategories);
+        tournamentExperienceRepository.deleteAllInBatch(deletedTournamentExperiences);
 
+        newProfile.setUser(userRepository.getById(userId));
+        newProfile.setId(currentProfile.getId());
+
+        profileRepository.saveAndFlush(newProfile);
 
         return profileRepository.findByUserId(userId).orElseThrow(() -> new ResourceNotFoundException(ENTITY, userId));
     }

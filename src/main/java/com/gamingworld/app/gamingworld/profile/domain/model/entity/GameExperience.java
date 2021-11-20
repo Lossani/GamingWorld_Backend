@@ -1,12 +1,8 @@
 package com.gamingworld.app.gamingworld.profile.domain.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,6 +25,11 @@ public class GameExperience {
     @Column(nullable = false)
     private Integer experience;
 
+    @JsonIgnore
+    @ManyToOne //(targetEntity = Profile.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "profile_id")
+    private Profile profile;
+
     @Override
     public boolean equals(Object obj) {
         if (obj == this)
@@ -36,6 +37,10 @@ public class GameExperience {
         if (!(obj instanceof GameExperience))
             return false;
         GameExperience gameExperience = (GameExperience) obj;
+
+        if ((gameExperience.id == null && id != null) || (gameExperience.id != null && id == null))
+            return false;
+
         return gameExperience.id.equals(id);
     }
 }

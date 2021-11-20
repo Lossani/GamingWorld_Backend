@@ -1,5 +1,6 @@
 package com.gamingworld.app.gamingworld.profile.domain.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,7 +22,9 @@ public class TournamentExperience {
     @Column(nullable = false)
     private Integer position;
 
-    @ManyToOne()
+    @JsonIgnore
+    @ManyToOne //(targetEntity = Profile.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "profile_id")
     private Profile profile;
 
     @Override
@@ -31,6 +34,10 @@ public class TournamentExperience {
         if (!(obj instanceof TournamentExperience))
             return false;
         TournamentExperience tournamentExperience = (TournamentExperience) obj;
+
+        if ((tournamentExperience.id == null && id != null) || (tournamentExperience.id != null && id == null))
+            return false;
+
         return tournamentExperience.id.equals(id);
     }
 }

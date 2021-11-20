@@ -1,5 +1,6 @@
 package com.gamingworld.app.gamingworld.profile.domain.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,6 +23,12 @@ public class FavoriteGame {
     //@JoinColumn(name = "game_id")
     private String game;
 
+    @JsonIgnore
+    @ManyToOne //(targetEntity = Profile.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "profile_id")
+    private Profile profile;
+    //private Long profileId;
+
     @Override
     public boolean equals(Object obj) {
         if (obj == this)
@@ -29,6 +36,10 @@ public class FavoriteGame {
         if (!(obj instanceof FavoriteGame))
             return false;
         FavoriteGame favoriteGame = (FavoriteGame) obj;
+
+        if ((favoriteGame.id == null && id != null) || (favoriteGame.id != null && id == null))
+            return false;
+
         return favoriteGame.id.equals(id);
     }
 }
