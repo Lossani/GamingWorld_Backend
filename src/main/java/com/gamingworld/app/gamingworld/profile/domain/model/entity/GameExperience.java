@@ -20,7 +20,7 @@ public class GameExperience {
 
     //@ManyToOne(targetEntity = Game.class, fetch = FetchType.LAZY)
     //@JoinColumn(name = "game_id")
-    private String game;
+    private Long gameId;
 
     @Column(nullable = false)
     private Integer experience;

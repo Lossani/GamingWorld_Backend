@@ -21,7 +21,7 @@ public class FavoriteGame {
 
     //@ManyToOne(targetEntity = Game.class, fetch = FetchType.LAZY)
     //@JoinColumn(name = "game_id")
-    private String game;
+    private Long gameId;
 
     @JsonIgnore
     @ManyToOne //(targetEntity = Profile.class, fetch = FetchType.LAZY)
