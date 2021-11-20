@@ -41,7 +41,7 @@ public class ProfileController {
     */
 
     @PutMapping(path = "/{userId}")
-    public ProfileResource updateByUserId(@PathParam("userId") Long userId, @RequestBody SaveProfileResource profile){
+    public ProfileResource updateByUserId(@PathVariable("userId") Long userId, @RequestBody SaveProfileResource profile){
         return mapper.toResource(profileService.updateByUserId(userId, mapper.toModel(profile)));
     }
 }

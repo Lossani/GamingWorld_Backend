@@ -17,7 +17,7 @@ public class SaveProfileResource {
 
     // Relations
     private List<GameExperience> gameExperiences;
-    private List<FavoriteGame> favouriteGames;
+    private List<FavoriteGame> favoriteGames;
     private List<StreamerSponsor> streamerSponsors;
     private List<TournamentExperience> tournamentExperiences;
     private List<StreamingCategory> streamingCategories;

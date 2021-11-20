@@ -1,5 +1,6 @@
 package com.gamingworld.app.gamingworld.profile.domain.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,7 +18,9 @@ public class StreamingCategory {
     @Column
     private String name;
 
-    @ManyToOne()
+    @JsonIgnore
+    @ManyToOne //(targetEntity = Profile.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "profile_id")
     private Profile profile;
 
     @Override
@@ -27,6 +30,10 @@ public class StreamingCategory {
         if (!(obj instanceof StreamingCategory))
             return false;
         StreamingCategory streamingCategory = (StreamingCategory) obj;
+
+        if ((streamingCategory.id == null && id != null) || (streamingCategory.id != null && id == null))
+            return false;
+
         return streamingCategory.id.equals(id);
     }
 }

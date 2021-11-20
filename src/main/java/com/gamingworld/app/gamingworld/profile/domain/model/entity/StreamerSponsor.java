@@ -1,6 +1,7 @@
 package com.gamingworld.app.gamingworld.profile.domain.model.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,7 +21,9 @@ public class StreamerSponsor {
     @Column
     private String name;
 
-    @ManyToOne()
+    @JsonIgnore
+    @ManyToOne //(targetEntity = Profile.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "profile_id")
     private Profile profile;
 
     @Override
@@ -30,6 +33,10 @@ public class StreamerSponsor {
         if (!(obj instanceof StreamerSponsor))
             return false;
         StreamerSponsor streamerSponsor = (StreamerSponsor) obj;
+
+        if ((streamerSponsor.id == null && id != null) || (streamerSponsor.id != null && id == null))
+            return false;
+
         return streamerSponsor.id.equals(id);
     }
 }
