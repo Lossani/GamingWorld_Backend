@@ -38,8 +38,8 @@ public class CreateTournamentResource {
     @NotNull
     private Integer tournamentCapacity;
 
-//    @NotNull
-//    private Integer gameId;
+    @NotNull
+    private Integer gameId;
 
 
 

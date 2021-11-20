@@ -31,7 +31,7 @@ public class Tournament extends AuditModel implements Serializable{
     private User user;
 
     //@OneToOne()
-    private String game;
+    private Integer gameId;
 
     @Nullable
     @OneToMany()

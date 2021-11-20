@@ -20,6 +20,6 @@ public class TournamentResource {
     private Date tournamentDate;
     private Boolean tournamentStatus;
     private Integer tournamentCapacity;
-//    private Integer gameId;
+    private Integer gameId;
 
 }

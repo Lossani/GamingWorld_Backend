@@ -149,7 +149,8 @@ public class GameServiceImpl implements GameService {
 
     private ExternalAPI getIGDBCredentials()
     {
-        ExternalAPI credentials = externalAPIRepository.findByExternalAPIName("TWITCH_AUTH").get(0);
+        ExternalAPI credentials = externalAPIRepository.findByExternalAPIName("TWITCH_AUTH").size() != 0
+                ? externalAPIRepository.findByExternalAPIName("TWITCH_AUTH").get(0) : null;
 
         if (credentials == null)
         {
