@@ -33,6 +33,11 @@ public class ProfileController {
         return profileService.findById(profileId);
     }
 
+    @GetMapping(path = "/user/{userId}")
+    public Profile getByUserId(@PathVariable("userId") Long userId){
+        return profileService.findByUserId(userId);
+    }
+
     /* We automatically create a profile for new users, so we do not need extra profiles for now.
     @PostMapping(path = "")
     public ProfileResource create(@RequestBody SaveProfileResource profile){

@@ -9,6 +9,7 @@ import com.gamingworld.app.gamingworld.profile.domain.model.entity.*;
 import com.gamingworld.app.gamingworld.profile.domain.persitence.*;
 import com.gamingworld.app.gamingworld.profile.domain.service.ProfileService;
 
+import com.gamingworld.app.gamingworld.security.domain.model.entity.User;
 import com.gamingworld.app.gamingworld.security.domain.persistence.UserRepository;
 import com.gamingworld.app.gamingworld.shared.exception.ResourceNotFoundException;
 import com.gamingworld.app.gamingworld.shared.exception.ResourceValidationException;
@@ -56,6 +57,11 @@ public class ProfileServiceImpl implements ProfileService{
     @Override
     public Profile findById(Long id) {
         return profileRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(ENTITY, id));
+    }
+
+    @Override
+    public Profile findByUserId(Long userId) {
+        return profileRepository.findByUserId(userId).orElseThrow(() -> new ResourceNotFoundException(ENTITY, userId));
     }
 
     /* We automatically create a profile for new users, so we do not need extra profiles for now.
