@@ -22,6 +22,8 @@ public class GameExperience {
     //@JoinColumn(name = "game_id")
     private Long gameId;
 
+    private String gameName;
+
     @Column(nullable = false)
     private Integer experience;
 

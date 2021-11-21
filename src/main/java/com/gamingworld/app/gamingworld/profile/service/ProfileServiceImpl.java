@@ -13,9 +13,12 @@ import com.gamingworld.app.gamingworld.security.domain.model.entity.User;
 import com.gamingworld.app.gamingworld.security.domain.persistence.UserRepository;
 import com.gamingworld.app.gamingworld.shared.exception.ResourceNotFoundException;
 import com.gamingworld.app.gamingworld.shared.exception.ResourceValidationException;
+import com.gamingworld.app.gamingworld.shared.inbound.game.domain.model.entity.Game;
+import com.gamingworld.app.gamingworld.shared.inbound.game.domain.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
@@ -30,6 +33,9 @@ public class ProfileServiceImpl implements ProfileService{
         this.validator = validator;
         this.userRepository = userRepository;
     }
+
+    @Autowired
+    private GameService gameService;
 
     @Autowired
     private ProfileRepository profileRepository;
@@ -94,10 +100,24 @@ public class ProfileServiceImpl implements ProfileService{
         for (GameExperience gameExperience:
         newProfile.getGameExperiences()) {
             gameExperience.setProfile(currentProfile);
+
+            if (gameExperience.getGameId() != null)
+            {
+                Optional<Game> game = gameService.findById(gameExperience.getGameId());
+
+                game.ifPresent(value -> gameExperience.setGameName(value.getName()));
+            }
         }
         for (FavoriteGame favoriteGame:
                 newProfile.getFavoriteGames()) {
             favoriteGame.setProfile(currentProfile);
+
+            if (favoriteGame.getGameId() != null)
+            {
+                Optional<Game> game = gameService.findById(favoriteGame.getGameId());
+
+                game.ifPresent(value -> favoriteGame.setGameName(value.getName()));
+            }
         }
         for (StreamerSponsor streamerSponsor:
                 newProfile.getStreamerSponsors()) {

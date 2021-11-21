@@ -23,6 +23,8 @@ public class FavoriteGame {
     //@JoinColumn(name = "game_id")
     private Long gameId;
 
+    private String gameName;
+
     @JsonIgnore
     @ManyToOne //(targetEntity = Profile.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "profile_id")
