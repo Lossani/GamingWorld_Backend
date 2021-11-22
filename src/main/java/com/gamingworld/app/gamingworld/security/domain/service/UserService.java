@@ -12,5 +12,7 @@ public interface UserService {
 
     public Optional<User> findByEmail(String id);
 
+    public List<User> getAllByUsername(String username);
+
     public User save(User entity);
 }

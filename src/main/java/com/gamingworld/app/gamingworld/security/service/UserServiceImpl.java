@@ -1,7 +1,9 @@
 package com.gamingworld.app.gamingworld.security.service;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.gamingworld.app.gamingworld.profile.domain.model.entity.Profile;
 import com.gamingworld.app.gamingworld.profile.domain.persitence.ProfileRepository;
@@ -42,6 +44,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public Optional<User> findByEmail(String email){
         return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public List<User> getAllByUsername(String username) {
+        return this.userRepository.findAll().stream().filter(o-> o.getUsername().toLowerCase().contains(username.toLowerCase())).collect(Collectors.toList());
     }
 
     @Override

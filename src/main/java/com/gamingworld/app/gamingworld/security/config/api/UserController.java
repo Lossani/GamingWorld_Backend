@@ -20,6 +20,12 @@ public class UserController {
     @GetMapping(path = "")
     public @ResponseBody List<User> getAll(){
         return userService.getAll();
+
+    }
+
+    @GetMapping(path = "/find")
+    public @ResponseBody List<User> getAllByUsername(@RequestParam String username){
+        return userService.getAllByUsername(username);
     }
 
     @GetMapping(path = "/email")
