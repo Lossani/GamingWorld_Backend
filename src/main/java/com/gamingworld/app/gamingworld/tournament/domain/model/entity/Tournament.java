@@ -1,13 +1,11 @@
 package com.gamingworld.app.gamingworld.tournament.domain.model.entity;
 
-import javax.persistence.*;
-
 import com.gamingworld.app.gamingworld.security.domain.model.entity.User;
 import com.gamingworld.app.gamingworld.shared.model.AuditModel;
-
 import lombok.*;
 import org.springframework.lang.Nullable;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;

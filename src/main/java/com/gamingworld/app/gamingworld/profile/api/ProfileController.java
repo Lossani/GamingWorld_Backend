@@ -1,17 +1,14 @@
 package com.gamingworld.app.gamingworld.profile.api;
 
-import java.util.List;
-
-import javax.websocket.server.PathParam;
-
 import com.gamingworld.app.gamingworld.profile.domain.model.entity.Profile;
 import com.gamingworld.app.gamingworld.profile.domain.service.ProfileService;
-
 import com.gamingworld.app.gamingworld.profile.mapping.ProfileMapper;
 import com.gamingworld.app.gamingworld.profile.resource.ProfileResource;
 import com.gamingworld.app.gamingworld.profile.resource.SaveProfileResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api/v1/profiles")

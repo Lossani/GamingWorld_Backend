@@ -1,13 +1,12 @@
 package com.gamingworld.app.gamingworld.security.config.api;
 
-import java.util.List;
-import java.util.Optional;
-
 import com.gamingworld.app.gamingworld.security.domain.model.entity.User;
 import com.gamingworld.app.gamingworld.security.service.UserServiceImpl;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 
 @RestController

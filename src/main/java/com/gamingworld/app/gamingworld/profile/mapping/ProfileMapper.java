@@ -1,11 +1,9 @@
 package com.gamingworld.app.gamingworld.profile.mapping;
 
 import com.gamingworld.app.gamingworld.profile.domain.model.entity.Profile;
-import com.gamingworld.app.gamingworld.profile.resource.SaveProfileResource;
 import com.gamingworld.app.gamingworld.profile.resource.ProfileResource;
+import com.gamingworld.app.gamingworld.profile.resource.SaveProfileResource;
 import com.gamingworld.app.gamingworld.shared.mapping.EnhancedModelMapper;
-import com.gamingworld.app.gamingworld.tournament.domain.model.entity.Tournament;
-import com.gamingworld.app.gamingworld.tournament.resource.UpdateTournamentResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

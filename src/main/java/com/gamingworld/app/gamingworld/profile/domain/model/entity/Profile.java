@@ -1,13 +1,11 @@
 package com.gamingworld.app.gamingworld.profile.domain.model.entity;
 
-import java.util.List;
-
-import javax.persistence.*;
-
 import com.gamingworld.app.gamingworld.security.domain.model.entity.User;
 import com.gamingworld.app.gamingworld.shared.model.AuditModel;
-
 import lombok.*;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter

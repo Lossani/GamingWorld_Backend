@@ -1,5 +1,6 @@
 package com.gamingworld.app.gamingworld.tournament.api;
 
+import com.gamingworld.app.gamingworld.profile.domain.persitence.ProfileRepository;
 import com.gamingworld.app.gamingworld.tournament.domain.model.entity.Participant;
 import com.gamingworld.app.gamingworld.tournament.domain.model.entity.Team;
 import com.gamingworld.app.gamingworld.tournament.domain.model.entity.TeamParticipant;
@@ -13,10 +14,7 @@ import com.gamingworld.app.gamingworld.tournament.mapping.TeamMapper;
 import com.gamingworld.app.gamingworld.tournament.mapping.TeamParticipantMapper;
 import com.gamingworld.app.gamingworld.tournament.mapping.TournamentMapper;
 import com.gamingworld.app.gamingworld.tournament.resource.*;
-import com.gamingworld.app.gamingworld.profile.domain.persitence.ProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,11 +1,8 @@
 package com.gamingworld.app.gamingworld.profile.domain.service;
 
-import java.util.List;
-import java.util.Optional;
-
-import com.gamingworld.app.gamingworld.profile.domain.model.entity.GameExperience;
 import com.gamingworld.app.gamingworld.profile.domain.model.entity.Profile;
-import com.gamingworld.app.gamingworld.security.domain.model.entity.User;
+
+import java.util.List;
 
 public interface ProfileService {
     public List<Profile> getAll();

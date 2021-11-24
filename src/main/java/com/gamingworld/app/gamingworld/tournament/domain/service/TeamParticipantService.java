@@ -1,6 +1,5 @@
 package com.gamingworld.app.gamingworld.tournament.domain.service;
 
-import com.gamingworld.app.gamingworld.tournament.domain.model.entity.Participant;
 import com.gamingworld.app.gamingworld.tournament.domain.model.entity.TeamParticipant;
 import org.springframework.http.ResponseEntity;
 

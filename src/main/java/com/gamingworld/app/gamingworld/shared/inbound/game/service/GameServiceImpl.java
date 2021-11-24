@@ -1,22 +1,14 @@
 package com.gamingworld.app.gamingworld.shared.inbound.game.service;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-
 import com.gamingworld.app.gamingworld.shared.inbound.externalapi.domain.model.entity.ExternalAPI;
 import com.gamingworld.app.gamingworld.shared.inbound.externalapi.domain.persistence.ExternalAPIRepository;
 import com.gamingworld.app.gamingworld.shared.inbound.externalapi.mapping.ExternalAPIMapper;
+import com.gamingworld.app.gamingworld.shared.inbound.externalapi.mapping.TwitchOAuthResponseMapper;
 import com.gamingworld.app.gamingworld.shared.inbound.externalapi.resource.TwitchOAuthResponseResource;
 import com.gamingworld.app.gamingworld.shared.inbound.game.domain.model.entity.Game;
 import com.gamingworld.app.gamingworld.shared.inbound.game.domain.service.GameService;
-
-import com.gamingworld.app.gamingworld.shared.inbound.externalapi.mapping.TwitchOAuthResponseMapper;
 import com.gamingworld.app.gamingworld.shared.inbound.game.mapping.GameMapper;
+import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.classic.methods.HttpPost;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
@@ -26,13 +18,19 @@ import org.apache.hc.core5.http.io.entity.StringEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class GameServiceImpl implements GameService {
     private static final String TWITCH_API_CREDENTIALS_URL = "https://id.twitch.tv/oauth2/token?client_id=8en9cck6wbdrkinl4i0oahhxf3ali1&client_secret=jh7gihohaly38ds1e0v98xcnntn7wr&grant_type=client_credentials";
     private static final String IGDB_GAMES_ENDPOINT = "https://api.igdb.com/v4/games";
-
-    //@Autowired
-    //private GameRepository gameRepository;
+    private static final String TWITCH_TOP_GAMES_URL = "https://api.twitch.tv/helix/games/top";
 
     @Autowired
     private ExternalAPIRepository externalAPIRepository;
@@ -48,9 +46,6 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public List<Game> getRandomList(Integer limit) {
-        if (limit == null)
-            limit = 10;
-
         String result = makeRequestToIGDB("fields name, cover.url; sort date desc; limit " + limit + ";");
 
         return gameMapper.toModelList(result);
@@ -58,11 +53,6 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public Optional<Game> findById(Long id) {
-        if (id == null)
-        {
-            return Optional.empty();
-        }
-
         String result = makeRequestToIGDB("fields name, cover.url; where id=" + id + ";");
 
         result = result.substring(1, result.length() - 1); // We get response as an Array, so we need to remove those brackets
@@ -79,12 +69,31 @@ public class GameServiceImpl implements GameService {
         {
             return List.of();
         }
-        if (limit == null)
-            limit = 10;
 
         String result = makeRequestToIGDB("fields name, cover.url; search \"" + name + "\"; limit " + limit + ";");
 
         return gameMapper.toModelList(result);
+    }
+
+
+    @Override
+    public String getTopTwitchGames(Integer limit) {
+
+        ExternalAPI credentials = getIGDBCredentials();
+
+        try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
+            HttpGet httpPost = new HttpGet(TWITCH_TOP_GAMES_URL);
+
+            httpPost.setHeader("Authorization", "Bearer " + credentials.getToken());
+            httpPost.setHeader("Client-ID", "8en9cck6wbdrkinl4i0oahhxf3ali1");
+
+            try (CloseableHttpResponse response = httpclient.execute(httpPost)) {
+                return getResponseBodyFromRequest(response);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Error at request made to external API Twitch.";
+        }
     }
 
     public void getNewIGDBCredentials() {
@@ -136,14 +145,11 @@ public class GameServiceImpl implements GameService {
             httpPost.setHeader("Client-ID", "8en9cck6wbdrkinl4i0oahhxf3ali1");
 
             try (CloseableHttpResponse response = httpclient.execute(httpPost)) {
-
-                System.out.println("Response from IGDB API Games Endpoint was: " + response.getCode());
-
                 return getResponseBodyFromRequest(response);
             }
         } catch (IOException e) {
             e.printStackTrace();
-            return "";
+            return "Error at request made to external API IGDB.";
         }
     }
 

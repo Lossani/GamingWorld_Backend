@@ -1,14 +1,12 @@
 package com.gamingworld.app.gamingworld.tournament.domain.model.entity;
 
-import java.io.Serializable;
-import java.util.List;
+import com.gamingworld.app.gamingworld.profile.domain.model.entity.Profile;
+import com.gamingworld.app.gamingworld.shared.model.AuditModel;
+import lombok.*;
 
 import javax.persistence.*;
-
-import com.gamingworld.app.gamingworld.shared.model.AuditModel;
-import com.gamingworld.app.gamingworld.profile.domain.model.entity.Profile;
-
-import lombok.*;
+import java.io.Serializable;
+import java.util.List;
 
 @Getter
 @Setter

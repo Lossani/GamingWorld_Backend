@@ -1,15 +1,9 @@
 package com.gamingworld.app.gamingworld.profile.service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gamingworld.app.gamingworld.profile.domain.model.entity.*;
 import com.gamingworld.app.gamingworld.profile.domain.persitence.*;
 import com.gamingworld.app.gamingworld.profile.domain.service.ProfileService;
-
-import com.gamingworld.app.gamingworld.security.domain.model.entity.User;
 import com.gamingworld.app.gamingworld.security.domain.persistence.UserRepository;
 import com.gamingworld.app.gamingworld.shared.exception.ResourceNotFoundException;
 import com.gamingworld.app.gamingworld.shared.exception.ResourceValidationException;
@@ -18,9 +12,11 @@ import com.gamingworld.app.gamingworld.shared.inbound.game.domain.service.GameSe
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class ProfileServiceImpl implements ProfileService{

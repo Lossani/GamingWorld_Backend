@@ -1,23 +1,20 @@
 package com.gamingworld.app.gamingworld.security.service;
 
-import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
 import com.gamingworld.app.gamingworld.profile.domain.model.entity.Profile;
 import com.gamingworld.app.gamingworld.profile.domain.persitence.ProfileRepository;
 import com.gamingworld.app.gamingworld.security.domain.model.entity.User;
 import com.gamingworld.app.gamingworld.security.domain.persistence.UserRepository;
 import com.gamingworld.app.gamingworld.security.domain.service.UserService;
-
 import com.gamingworld.app.gamingworld.shared.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
