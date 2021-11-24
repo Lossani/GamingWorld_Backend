@@ -1,5 +1,6 @@
 package com.gamingworld.app.gamingworld.tournament.api;
 
+import com.gamingworld.app.gamingworld.profile.domain.persitence.ProfileRepository;
 import com.gamingworld.app.gamingworld.tournament.domain.model.entity.Participant;
 import com.gamingworld.app.gamingworld.tournament.domain.model.entity.Team;
 import com.gamingworld.app.gamingworld.tournament.domain.model.entity.TeamParticipant;
@@ -13,12 +14,7 @@ import com.gamingworld.app.gamingworld.tournament.mapping.TeamMapper;
 import com.gamingworld.app.gamingworld.tournament.mapping.TeamParticipantMapper;
 import com.gamingworld.app.gamingworld.tournament.mapping.TournamentMapper;
 import com.gamingworld.app.gamingworld.tournament.resource.*;
-import com.gamingworld.app.gamingworld.user.domain.model.entity.Profile;
-import com.gamingworld.app.gamingworld.user.domain.persitence.ProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,7 +41,7 @@ public class TournamentController {
     private TeamParticipantService teamParticipantService;
 
     @Autowired
-    private TournamentMapper mapper;
+    private TournamentMapper tournamentMapper;
 
     @Autowired
     private ParticipantMapper participantMapper;
@@ -57,8 +53,8 @@ public class TournamentController {
     private TeamMapper teamMapper;
 
     @GetMapping
-    public Page<TournamentResource> getAllTournaments(Pageable pageable) {
-        return mapper.modelListToPage(tournamentService.getAll(), pageable);
+    public List<Tournament> getAllTournaments() {
+        return tournamentService.getAll();
     }
 
     @GetMapping("/user/{userId}")
@@ -67,22 +63,27 @@ public class TournamentController {
     }
 
     @GetMapping("{tournamentId}")
-    public TournamentResource getTournamentById(@PathVariable("tournamentId") Long tournamentId) {
-
-
-        return mapper.toResource(tournamentService.getById(tournamentId));
+    public Tournament getTournamentById(@PathVariable("tournamentId") Long tournamentId) {
+        return tournamentService.getById(tournamentId);
     }
 
     @PostMapping("{userId}/create")
     public TournamentResource createTournament(@RequestBody CreateTournamentResource request, @PathVariable("userId") Long userId) {
-        return mapper.toResource(tournamentService.create(userId,mapper.toModel(request)));
+        return tournamentMapper.toResource(tournamentService.create(userId,tournamentMapper.toModel(request)));
     }
 
+    // Participants
     @PostMapping("{tournamentId}/participants")
     public ParticipantResource createParticipantByTournamentId(@RequestBody CreateParticipantResource request, @PathVariable("tournamentId") Long tournamentId) {
 
         return participantMapper.toResource(participantService.create(tournamentId, participantMapper.toModel(request)));
     }
+
+    @GetMapping("{tournamentId}/participants/{participantId}/validate")
+    public Boolean validateParticipantTournament(@PathVariable("tournamentId") Long tournamentId, @PathVariable("participantId") Long participantId){
+        return participantService.validateParticipantInTournament(tournamentId, participantId);
+    }
+
 
     @GetMapping("{tournamentId}/participants")
     public List<Participant> getAllParticipantsByTournamentId(@PathVariable("tournamentId") Long tournamentId) {
@@ -146,12 +147,17 @@ public class TournamentController {
 
     @PutMapping("{tournamentId}")
     public TournamentResource updateTournament(@PathVariable Long tournamentId, @RequestBody UpdateTournamentResource request) {
-        return mapper.toResource(tournamentService.update(tournamentId, mapper.toModel(request)));
+        return tournamentMapper.toResource(tournamentService.update(tournamentId, tournamentMapper.toModel(request)));
     }
 
     @DeleteMapping("{tournamentId}")
     public ResponseEntity<?> deleteTournament(@PathVariable Long tournamentId) {
         return tournamentService.delete(tournamentId);
+    }
+
+    @PutMapping("{tournamentId}/end")
+    public TournamentResource endTournament(@PathVariable("tournamentId") Long tournamentId){
+        return tournamentMapper.toResource(tournamentService.endTournament(tournamentId));
     }
 
 }

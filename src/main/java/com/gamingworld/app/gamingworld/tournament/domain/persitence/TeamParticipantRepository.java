@@ -1,6 +1,5 @@
 package com.gamingworld.app.gamingworld.tournament.domain.persitence;
 
-import com.gamingworld.app.gamingworld.tournament.domain.model.entity.Participant;
 import com.gamingworld.app.gamingworld.tournament.domain.model.entity.TeamParticipant;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

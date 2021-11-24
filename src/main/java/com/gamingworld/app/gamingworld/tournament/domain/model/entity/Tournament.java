@@ -1,15 +1,13 @@
 package com.gamingworld.app.gamingworld.tournament.domain.model.entity;
 
-import javax.persistence.*;
-
-import com.gamingworld.app.gamingworld.game.domain.model.entity.Game;
-import com.gamingworld.app.gamingworld.tournament.shared.model.AuditModel;
-import com.gamingworld.app.gamingworld.user.domain.model.entity.User;
-
+import com.gamingworld.app.gamingworld.security.domain.model.entity.User;
+import com.gamingworld.app.gamingworld.shared.model.AuditModel;
 import lombok.*;
 import org.springframework.lang.Nullable;
 
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -30,8 +28,8 @@ public class Tournament extends AuditModel implements Serializable{
     @OneToOne()
     private User user;
 
-    @OneToOne()
-    private Game game;
+    //@OneToOne()
+    private Integer gameId;
 
     @Nullable
     @OneToMany()
@@ -43,9 +41,11 @@ public class Tournament extends AuditModel implements Serializable{
     private List<Team> teamList;
 
     @Column
+    private Integer tournamentCapacity;
+
+    @Column
     private String title;
 
-    @NonNull
     @Column
     private Boolean isTeamMode;
 
@@ -54,4 +54,14 @@ public class Tournament extends AuditModel implements Serializable{
 
     @Column(name = "prize_pool")
     private Integer prizePool;
+
+    @Column
+    private String urlToImage;
+
+    @Column
+    private Boolean tournamentStatus;
+
+    @Column
+    private Date tournamentDate;
+
 }

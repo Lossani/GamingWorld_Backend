@@ -1,6 +1,6 @@
 package com.gamingworld.app.gamingworld.tournament.mapping;
 
-import com.gamingworld.app.gamingworld.tournament.shared.mapping.EnhancedModelMapper;
+import com.gamingworld.app.gamingworld.shared.mapping.EnhancedModelMapper;
 import com.gamingworld.app.gamingworld.tournament.domain.model.entity.Tournament;
 import com.gamingworld.app.gamingworld.tournament.resource.CreateTournamentResource;
 import com.gamingworld.app.gamingworld.tournament.resource.TournamentResource;

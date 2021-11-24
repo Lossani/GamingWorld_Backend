@@ -1,9 +1,9 @@
 package com.gamingworld.app.gamingworld.tournament.mapping;
 
-import com.gamingworld.app.gamingworld.tournament.domain.model.entity.Participant;
+import com.gamingworld.app.gamingworld.shared.mapping.EnhancedModelMapper;
 import com.gamingworld.app.gamingworld.tournament.domain.model.entity.Team;
-import com.gamingworld.app.gamingworld.tournament.resource.*;
-import com.gamingworld.app.gamingworld.tournament.shared.mapping.EnhancedModelMapper;
+import com.gamingworld.app.gamingworld.tournament.resource.CreateTeamResource;
+import com.gamingworld.app.gamingworld.tournament.resource.TeamResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

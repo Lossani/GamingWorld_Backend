@@ -19,4 +19,6 @@ public interface ParticipantService {
 
     public ResponseEntity<?> delete(Long tournamentId);
     public List<Participant> getTournamentsByUserId(Long userId);
+
+    public Boolean validateParticipantInTournament(Long tournamentId, Long participantId);
 }

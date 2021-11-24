@@ -1,16 +1,16 @@
 package com.gamingworld.app.gamingworld.tournament.service;
 
+import com.gamingworld.app.gamingworld.security.domain.model.entity.User;
+import com.gamingworld.app.gamingworld.security.domain.persistence.UserRepository;
+import com.gamingworld.app.gamingworld.shared.exception.ResourceNotFoundException;
+import com.gamingworld.app.gamingworld.shared.exception.ResourceValidationException;
 import com.gamingworld.app.gamingworld.tournament.domain.model.entity.Participant;
 import com.gamingworld.app.gamingworld.tournament.domain.model.entity.Team;
+import com.gamingworld.app.gamingworld.tournament.domain.model.entity.Tournament;
 import com.gamingworld.app.gamingworld.tournament.domain.persitence.ParticipantRepository;
 import com.gamingworld.app.gamingworld.tournament.domain.persitence.TeamRepository;
-import com.gamingworld.app.gamingworld.tournament.shared.exception.ResourceNotFoundException;
-import com.gamingworld.app.gamingworld.tournament.shared.exception.ResourceValidationException;
-import com.gamingworld.app.gamingworld.tournament.domain.model.entity.Tournament;
 import com.gamingworld.app.gamingworld.tournament.domain.persitence.TournamentRepository;
 import com.gamingworld.app.gamingworld.tournament.domain.service.TournamentService;
-import com.gamingworld.app.gamingworld.user.domain.model.entity.User;
-import com.gamingworld.app.gamingworld.user.domain.persitence.UserRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -77,7 +77,8 @@ public class TournamentServiceImpl implements TournamentService {
                 tournamentRepository.save(
                         tournament.withTitle(request.getTitle())
                                 .withDescription(request.getDescription())
-                                .withPrizePool(request.getPrizePool()))
+                                .withPrizePool(request.getPrizePool())
+                                )
         ).orElseThrow(() -> new ResourceNotFoundException(ENTITY, tournamentId));
     }
 
@@ -119,5 +120,12 @@ public class TournamentServiceImpl implements TournamentService {
             return ResponseEntity.ok().build();
         }).orElseThrow(() -> new ResourceNotFoundException(ENTITY, participantId));
 
+    }
+
+    @Override
+    public Tournament endTournament(Long tournamentId) {
+        Tournament tournament = tournamentRepository.getById(tournamentId);
+        tournament.setTournamentStatus(false);
+        return tournamentRepository.save(tournament);
     }
 }
