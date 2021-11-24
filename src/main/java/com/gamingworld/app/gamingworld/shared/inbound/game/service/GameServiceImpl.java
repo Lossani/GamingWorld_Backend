@@ -82,7 +82,7 @@ public class GameServiceImpl implements GameService {
         ExternalAPI credentials = getIGDBCredentials();
 
         try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
-            HttpGet httpPost = new HttpGet(TWITCH_TOP_GAMES_URL);
+            HttpGet httpPost = new HttpGet(TWITCH_TOP_GAMES_URL + "?limit=" + limit);
 
             httpPost.setHeader("Authorization", "Bearer " + credentials.getToken());
             httpPost.setHeader("Client-ID", "8en9cck6wbdrkinl4i0oahhxf3ali1");
