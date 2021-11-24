@@ -116,6 +116,7 @@ public class GameServiceImpl implements GameService {
     private String getResponseBodyFromRequest(CloseableHttpResponse response)
     {
         StringBuilder result = new StringBuilder();
+
         try (BufferedReader rd = new BufferedReader(
                 new InputStreamReader(response.getEntity().getContent(), StandardCharsets.UTF_8))) {
             String line;
