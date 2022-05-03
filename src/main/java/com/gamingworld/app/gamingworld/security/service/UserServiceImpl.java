@@ -9,6 +9,7 @@ import com.gamingworld.app.gamingworld.shared.exception.ResourceNotFoundExceptio
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -17,11 +18,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class UserServiceImpl implements UserService, UserDetailsService {
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-    
+public class UserServiceImpl implements UserDetailsService, UserService {
     @Autowired
     private UserRepository userRepository;
 
@@ -51,7 +48,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public User save(User entity){
 
-        entity.setPassword(passwordEncoder.encode(entity.getPassword()));
+        entity.setPassword(new BCryptPasswordEncoder().encode(entity.getPassword()));
         entity.addAuthority("ROLE_USER");
 
         User newUser = userRepository.save(entity);
