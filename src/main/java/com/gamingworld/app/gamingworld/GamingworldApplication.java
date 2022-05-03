@@ -16,5 +16,5 @@ public class GamingworldApplication extends SpringBootServletInitializer {
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 		return application.sources(GamingworldApplication.class);
 	}
-
 }
+
