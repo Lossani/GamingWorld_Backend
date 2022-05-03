@@ -12,7 +12,7 @@ public class MainPage {
     @GetMapping("/")
     ResponseEntity<Void> redirect() {
         return ResponseEntity.status(HttpStatus.FOUND)
-                .location(URI.create("https://api.gworld.xempre.com/swagger-ui/index.html"))
+                .location(URI.create("/swagger-ui/index.html"))
                 .build();
     }
 }
