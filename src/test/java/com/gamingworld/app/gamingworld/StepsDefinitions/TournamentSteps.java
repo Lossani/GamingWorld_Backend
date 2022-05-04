@@ -11,6 +11,7 @@ import io.cucumber.java.en.*;
 
 public class TournamentSteps {
     WebDriver driver = null;
+    String linkFrontEnd = "https://gworld.xempre.com/";
 
     @Given("that the user is at the tournament section")
     public void that_the_user_is_at_the_tournament_section() throws InterruptedException {
@@ -22,14 +23,14 @@ public class TournamentSteps {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
-        driver.navigate().to("https://gworld.xempre.com/login");
+        driver.navigate().to(linkFrontEnd + "/login");
         Thread.sleep(1000);
         driver.findElement(By.id("usernameLogin")).sendKeys("LEONARDOGOD");
         driver.findElement(By.id("passwordLogin")).sendKeys("1234");
         Thread.sleep(1000);
         driver.findElement(By.id("enterLogin")).sendKeys(Keys.ENTER);
         Thread.sleep(1000);
-        driver.navigate().to("https://gworld.xempre.com/tournaments");
+        driver.navigate().to(linkFrontEnd + "/tournaments");
         Thread.sleep(3000);
 
     }
@@ -56,7 +57,7 @@ public class TournamentSteps {
         driver.findElement(By.id("tournamentDate")).sendKeys("1715");
         Thread.sleep(1000);
         driver.findElement(By.id("mat-input-7")).sendKeys("Dota 2");
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         driver.findElement(By.id("mat-input-7")).sendKeys(Keys.ENTER);
         Thread.sleep(1000);
         Thread.sleep(1000);
@@ -94,6 +95,21 @@ public class TournamentSteps {
     }
     @Then("the data will not be stored and the tournament will not be created")
     public void the_data_will_not_be_stored_and_the_tournament_will_not_be_created() throws InterruptedException {
+        Thread.sleep(3000);
+        driver.close();
+        driver.quit();
+    }
+
+    @When("the user press Solo or Teams tournament filter")
+    public void the_user_press_Solo_or_Teams_tournament_filter() throws InterruptedException {
+        driver.findElement(By.id("soloTournamentFilterButton")).sendKeys(Keys.ENTER);
+        Thread.sleep(3000);
+        driver.findElement(By.id("teamTournamentFilterButton")).sendKeys(Keys.ENTER);
+        Thread.sleep(3000);
+    }
+
+    @Then("only the tournaments referring to this filter will be displayed")
+    public void only_the_tournaments_referring_to_this_filter_will_be_displayed() throws InterruptedException {
         Thread.sleep(3000);
         driver.close();
         driver.quit();

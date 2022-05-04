@@ -12,6 +12,8 @@ public class RegisterUserSteps {
 
     WebDriver driver = null;
 
+    String linkFrontEnd = "https://gworld.xempre.com/";
+
     @Given("that the user is at the register section")
     public void that_the_user_is_at_the_register_section() throws InterruptedException {
         System.out.println("Inside Step - browser is open");
@@ -22,7 +24,7 @@ public class RegisterUserSteps {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(40,TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
-        driver.navigate().to("https://gworld.xempre.com/sign-up");
+        driver.navigate().to(linkFrontEnd+"/sign-up");
 
     }
 
@@ -53,14 +55,14 @@ public class RegisterUserSteps {
     @Then("a message will show that the registration was successful and the user will be redirected to the login")
     public void a_message_will_show_that_the_registration_was_successful_and_the_user_will_be_redirected_to_the_login() throws InterruptedException{
         Thread.sleep(3000);
-        driver.navigate().to("https://gworld.xempre.com/login");
+        driver.navigate().to(linkFrontEnd+"/login");
         driver.close();
         driver.quit();
     }
     @Then("no data will be stored and the user will be redirected to the login")
     public void the_system_will_store_the_data_and_it_will_be_redirected_to_the_login_view() throws InterruptedException{
         Thread.sleep(3000);
-        driver.navigate().to("https://gworld.xempre.com/login");
+        driver.navigate().to(linkFrontEnd+"/login");
         driver.close();
         driver.quit();
     }
