@@ -1,5 +1,6 @@
 package com.gamingworld.app.gamingworld.StepsDefinitions;
 
+import java.security.Key;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -22,7 +23,6 @@ public class TournamentSteps {
         driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
         driver.navigate().to("https://gworld.xempre.com/login");
-        https://gworld.xempre.com/sign-up
         Thread.sleep(1000);
         driver.findElement(By.id("usernameLogin")).sendKeys("LEONARDOGOD");
         driver.findElement(By.id("passwordLogin")).sendKeys("1234");
@@ -48,11 +48,16 @@ public class TournamentSteps {
         Thread.sleep(1000);
         driver.findElement(By.id("tournamentDescription")).sendKeys("Torneo de prueba para los test de aceptacion comprobando");
         Thread.sleep(1000);
+        driver.findElement(By.id("tournamentPrize")).sendKeys(Keys.BACK_SPACE);
         driver.findElement(By.id("tournamentPrize")).sendKeys("100");
         Thread.sleep(1000);
-        driver.findElement(By.id("tournamentDate")).sendKeys("NO SE QUE PONER AHI");
+        driver.findElement(By.id("tournamentDate")).sendKeys("05052022");
+        driver.findElement(By.id("tournamentDate")).sendKeys(Keys.ARROW_RIGHT);
+        driver.findElement(By.id("tournamentDate")).sendKeys("1715");
         Thread.sleep(1000);
-        driver.findElement(By.id("mat-option-33")).sendKeys(Keys.ENTER);
+        driver.findElement(By.id("mat-input-7")).sendKeys("Dota 2");
+        Thread.sleep(2000);
+        driver.findElement(By.id("mat-input-7")).sendKeys(Keys.ENTER);
         Thread.sleep(1000);
         Thread.sleep(1000);
         driver.findElement(By.id("tournamentCapacity")).sendKeys("10");
@@ -68,6 +73,7 @@ public class TournamentSteps {
     public void press_the_button_cancel() throws InterruptedException {
         driver.findElement(By.id("cancelTournament")).sendKeys(Keys.ENTER);
         Thread.sleep(3000);
+        driver.findElement(By.id("mat-expansion-panel-header-0")).sendKeys(Keys.ENTER);
     }
 
     @When("the user is loading the page")

@@ -3,7 +3,7 @@ spring:
         hibernate:
             ddl-auto: update
     datasource:
-        url: 'jdbc:mysql://localhost:3306/gamingworld_aos'
-        username: external
+        url: 'jdbc:mysql://localhost:3306/gamingworld_evo'
+        username: evo
         password: XempreDB
         driver-class-name: com.mysql.cj.jdbc.Driver
