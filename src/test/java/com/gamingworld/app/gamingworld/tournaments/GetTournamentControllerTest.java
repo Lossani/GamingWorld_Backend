@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-public class GetTournamentsControllerTest extends AbstractTest {
+public class GetTournamentControllerTest extends AbstractTest {
     @Autowired
     private MockMvc mockMvc;
 
