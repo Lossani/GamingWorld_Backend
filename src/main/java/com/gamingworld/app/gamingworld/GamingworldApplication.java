@@ -25,7 +25,7 @@ public class GamingworldApplication extends SpringBootServletInitializer {
 	@Bean
 	public OpenAPI gamingworldAPIDocumentation() {
 		return new OpenAPI()
-				.addServersItem(new Server().url("https:/api.gworld.xempre.com"))
+				.addServersItem(new Server().url("https://api.gworld.xempre.com"))
 				.info(new Info().title("RESTFul API Documentation")
 						.description("Documentation for all GamingWorld RESTFul API Endpoints.")
 						.version("v3.0.0"));
