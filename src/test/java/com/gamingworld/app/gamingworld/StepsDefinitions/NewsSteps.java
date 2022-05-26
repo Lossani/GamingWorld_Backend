@@ -10,6 +10,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
+import static org.junit.Assert.assertTrue;
+
 public class NewsSteps {
 
     WebDriver driver = null;
@@ -42,6 +44,7 @@ public class NewsSteps {
     @Then("only the news referring to this filter will be displayed")
     public void only_the_news_referring_to_this_filter_will_be_displayed() throws InterruptedException {
         Thread.sleep(3000);
+        assertTrue(driver.findElement(By.id("visibleNew01")).isDisplayed());
         driver.close();
         driver.quit();
     }

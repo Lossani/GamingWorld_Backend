@@ -113,12 +113,12 @@ public class TournamentServiceImpl implements TournamentService {
     }
 
     @Override
-    public ResponseEntity<?> deleteParticipantInTournament(Long tournamentId, Long participantId) {
+    public ResponseEntity<?> deleteParticipantInTournament(Long tournamentId, Long userId) {
 
-        return participantRepository.findById(participantId).map(participant -> {
+        return participantRepository.findByUserId(userId).map(participant -> {
             participantRepository.delete(participant);
             return ResponseEntity.ok().build();
-        }).orElseThrow(() -> new ResourceNotFoundException(ENTITY, participantId));
+        }).orElseThrow(() -> new ResourceNotFoundException(ENTITY, userId));
 
     }
 

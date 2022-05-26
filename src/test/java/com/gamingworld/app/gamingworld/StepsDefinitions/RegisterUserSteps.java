@@ -5,8 +5,11 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import io.cucumber.java.en.*;
+
+import static org.junit.Assert.assertNotNull;
 
 public class RegisterUserSteps {
 
@@ -55,6 +58,10 @@ public class RegisterUserSteps {
     @Then("a message will show that the registration was successful and the user will be redirected to the login")
     public void a_message_will_show_that_the_registration_was_successful_and_the_user_will_be_redirected_to_the_login() throws InterruptedException{
         Thread.sleep(3000);
+        WebElement confirmMessage = driver.findElement(By.tagName("app-confirm-user-registration"));
+
+        assertNotNull(confirmMessage);
+
         driver.navigate().to(linkFrontEnd+"/login");
         driver.close();
         driver.quit();

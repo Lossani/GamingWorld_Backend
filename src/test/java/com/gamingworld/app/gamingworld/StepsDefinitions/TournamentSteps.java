@@ -1,14 +1,16 @@
 package com.gamingworld.app.gamingworld.StepsDefinitions;
 
 import java.security.Key;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import io.cucumber.java.en.*;
-
+import static org.junit.Assert.*;
 public class TournamentSteps {
     WebDriver driver = null;
     String linkFrontEnd = "https://gworld.xempre.com/";
@@ -83,12 +85,25 @@ public class TournamentSteps {
     }
     @Then("the application shows the most recent tournaments")
     public void the_application_shows_the_most_recent_tournaments() throws InterruptedException {
+        WebElement tournaments = driver.findElement(By.id("tournamentsList"));
+        assertNotNull(tournaments);
+        assertNotEquals(tournaments.getAttribute("innerHTML"), "");
         driver.close();
         driver.quit();
     }
 
     @Then("the tournament will be created successfully")
     public void the_tournament_will_be_created_successfully() throws InterruptedException {
+        List<WebElement> tournamentCards = driver.findElements(By.className("tournament-card"));
+
+        assertNotNull(tournamentCards);
+        assertNotEquals(tournamentCards.size(), 0);
+
+        WebElement latestTournament = tournamentCards.get(0);
+        assertFalse(latestTournament.getAttribute("innerHTML").isEmpty());
+
+        assertEquals(latestTournament.findElement(By.tagName("mat-card-title")).getText(), "Torneo test");
+
         Thread.sleep(3000);
         driver.close();
         driver.quit();
@@ -110,6 +125,18 @@ public class TournamentSteps {
 
     @Then("only the tournaments referring to this filter will be displayed")
     public void only_the_tournaments_referring_to_this_filter_will_be_displayed() throws InterruptedException {
+        List<WebElement> tournamentCards = driver.findElements(By.className("tournament-card"));
+
+        assertNotNull(tournamentCards);
+        assertNotEquals(tournamentCards.size(), 0);
+
+        String type = tournamentCards.get(0).getAttribute("data-tournament-type");
+
+        for (WebElement tournament: tournamentCards ) {
+            String tournamentType = tournament.getAttribute("data-tournament-type");
+            assertEquals(tournamentType, type);
+        }
+
         Thread.sleep(3000);
         driver.close();
         driver.quit();

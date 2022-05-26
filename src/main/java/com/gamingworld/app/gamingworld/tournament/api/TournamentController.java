@@ -106,10 +106,10 @@ public class TournamentController {
         return participantMapper.toResource(tournamentService.updateParticipantPoints(tournamentId, participantId, points));
     }
 
-    @DeleteMapping("{tournamentId}/participants/{participantId}")
+    @DeleteMapping("{tournamentId}/participants/{userId}")
     @Operation(summary = "Deletes a participant from a tournament.", description = "Deletes a participant from a tournament.")
-    public ResponseEntity<?> deleteParticipantInTournament(@PathVariable("tournamentId") Long tournamentId, @PathVariable("participantId") Long participantId){
-        return tournamentService.deleteParticipantInTournament(tournamentId, participantId);
+    public ResponseEntity<?> deleteParticipantInTournament(@PathVariable("tournamentId") Long tournamentId, @PathVariable("userId") Long userId){
+        return tournamentService.deleteParticipantInTournament(tournamentId, userId);
     }
 
     // TEAMS

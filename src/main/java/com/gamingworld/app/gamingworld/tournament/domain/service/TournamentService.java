@@ -17,6 +17,6 @@ public interface TournamentService {
     public List<Tournament> getTournamentsByUserId(Long userId);
     public Participant updateParticipantPoints(Long tournamentId, Long participantId, int points);
     public Team updateTeamPoints(Long tournamentId, Long teamId, int points);
-    public ResponseEntity<?> deleteParticipantInTournament(Long tournamentId, Long participantId);
+    public ResponseEntity<?> deleteParticipantInTournament(Long tournamentId, Long userId);
     public Tournament endTournament(Long tournamentId);
 }
