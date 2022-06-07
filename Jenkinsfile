@@ -32,4 +32,9 @@ pipeline{
                     }
                 }
     }
+    post {
+            always {
+                emailext body: 'The results of the pipeline is', rProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Pipeline results'
+            }
+        }
 }
