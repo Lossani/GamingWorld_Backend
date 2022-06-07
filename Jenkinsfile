@@ -35,7 +35,7 @@ pipeline{
     post {
             always {
 
-                emailext body: 'testing',subject: 'testing', to: 'fjorpa93@gmail.com, cc:jaorpa93@gmail.com'
+                emailext body: 'The result for this pipeline build was SUCCESFULL',from: 'fjorpa93@gmail.com',subject: 'CI/CD Results', to: 'fjorpa93@gmail.com, cc:jaorpa93@gmail.com'
             }
         }
 }
