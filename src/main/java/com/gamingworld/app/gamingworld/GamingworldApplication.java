@@ -27,12 +27,11 @@ public class GamingworldApplication extends SpringBootServletInitializer {
 
 	@Bean
 	public OpenAPI gamingworldAPIDocumentation() {
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-		LocalDateTime now = LocalDateTime.now();
+		//here
 		return new OpenAPI()
 				.addServersItem(new Server().url("https://api.gworld.xempre.com"))
 				.info(new Info().title("RESTFul API Documentation")
-						.description("Documentation for all GamingWorld RESTFul API Endpoints. Build at " + dtf.format(now))
+						.description("Documentation for all GamingWorld RESTFul API Endpoints. ")
 						.version("v3.0.0"));
 	}
 }
